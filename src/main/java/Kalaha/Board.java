@@ -17,6 +17,19 @@ public class Board {
     public Board() {
     }
 
+    public void lastInHome(int index) {
+        if (index == 6 || index == 13) {
+            // if last stone placed in home, player gets another round
+            playStones(index);
+            int i = index+1;
+        }
+    }     
+
+
+                    // //check if player
+                    // if (i == 6 || i == 13) {
+                    //     playStones(i);
+
     public void setStones(int hole, int value) {
         this.holes.set(hole, value);
     }
@@ -26,34 +39,56 @@ public class Board {
     }
 
     // public void playStones(int index) {
-    //     int i = getStones(index);
-    //     while (i > index) {
+    //     int i = index+1;
+    //     while (i <= getStones(index)) {
     //         System.out.println("dette er hull " + i);
 
     //         //for each iteration update hole with 1 more stone
-    //         setStones(index, getStones(index)+1);
+    //         setStones(i, getStones(i)+1);
     //         System.out.println(this.holes);
-    //         i--;
+    //         i++;
     //     } 
+    //     System.out.println(i);
           
     // }
 
-
-
-
-
-
-    public void playStones(int index) {
-        for (int i = index; i < this.holes.get(i); i++) {
+    public int playStones(int index) {
+        int initialIndex = getStones(index);
+        for (int i = (index+1); i <= initialIndex; i++) {
             System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
             setStones(i, getStones(i)+1);
             System.out.println(this.holes);
-        }
             
+            
+            if (i == initialIndex) {
+                return i;  
+            }
+             
+            
+            }
+            return 0;
+        }
+   
+
+
+
+    public void placeStones() {
+        
     }
 
+    public boolean checkIfHome(int i) {
+            if (i == 6 || i == 13) {
+                // if last stone placed in home, player gets another round
+                return true;
+            }
+            return false;
+    }
+
+    public void checkIfEmpty() {
+        
+    }
 
 
     public static void main(String[] args) {

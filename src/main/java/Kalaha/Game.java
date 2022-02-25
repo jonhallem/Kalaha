@@ -1,11 +1,12 @@
 package Kalaha;
 
-import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 public class Game {
     private String player1;
     private String player2;
+    private int player1Score = 0;
+    private int player2Score = 0;
     private boolean whoIsPlaying = true;
 
     //ToString metode
@@ -16,7 +17,7 @@ public class Game {
 
 
     //konstruktør av spillere me validering, uten æ,ø,å akkurat nå. evnt gyldig med tall.
-    public Game(String player1, String player2, boolean startingPlayer) {
+    public Game(String player1, String player2, boolean startingPlayer, Board board) {
         if (!Pattern.matches("[A-Za-z ]*", player1) && !Pattern.matches("[A-Za-z ]*", player1)) {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
         }
@@ -25,21 +26,41 @@ public class Game {
         this.player2 = player2;
         this.whoIsPlaying = startingPlayer;
     }
+//lag felt med board eller newBoard metode
 
 
 
-    public boolean playerPlaying() {
-        if (this.whoIsPlaying.equals(null)) {
-            //random
+    public void playRound(Board board, int index) {
+
+        board.checkIfHome(board.playStones(index));
+
+
         }
-        if (whoIsPlaying) == true) {
+
+
+        
+    }
+
+
+    public void playerPlaying() {
+        // if (this.whoIsPlaying.equals(null)) {
+        //     //random
+        // }
+        if (whoIsPlaying() == true) {
             return false;
         }
         return true;
     }
-
-
     
+
+
+
+
+
+
+
+
+
     //getters
     public String getPlayer1() {
         return player1;
@@ -49,7 +70,6 @@ public class Game {
     public String getPlayer2() {
         return player2;
     }
-
 
 
 
