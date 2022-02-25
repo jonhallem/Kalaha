@@ -1,10 +1,15 @@
-package exampleproject;
+package Kalaha;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
-public class ExampleProjectController {
+public class KalahaController {
+
+
+
+
+
+
+
     @FXML
     private TextField firstNumber, secondNumber, operator;
 

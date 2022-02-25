@@ -1,11 +1,10 @@
 package Kalaha;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Board {
-    private List<Integer> holes = new ArrayList<Integer>(Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 ));
+    private List<Integer> holes;
 
 
     //ToString
@@ -13,8 +12,10 @@ public class Board {
     public String toString() {
         return "Board holes=" + holes;
     }
+    
     //konstruktør av tomt brett
-    public Board() {
+    public Board(List<Integer> holes) {
+        this.holes = holes;
     }
 
     public void lastInHome(int index) {
@@ -72,12 +73,6 @@ public class Board {
         }
    
 
-
-
-    public void placeStones() {
-        
-    }
-
     public boolean checkIfHome(int i) {
             if (i == 6 || i == 13) {
                 // if last stone placed in home, player gets another round
@@ -92,7 +87,7 @@ public class Board {
 
 
     public static void main(String[] args) {
-        Board board1 = new Board();
+        Board board1 = new Board(Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 ));
         System.out.println(board1);
         board1.playStones(0);
         System.out.println(board1);

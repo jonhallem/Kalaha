@@ -1,4 +1,4 @@
-package exampleproject;
+package Kalaha;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ExampleProjectApp extends Application {
+public class KalahaApp extends Application {
 
     public static void main(String[] args) {
         Application.launch(args);

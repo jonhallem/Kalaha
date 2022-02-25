@@ -1,13 +1,16 @@
 package Kalaha;
 
 import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
 
 public class Game {
     private String player1;
     private String player2;
     private int player1Score = 0;
     private int player2Score = 0;
-    private boolean whoIsPlaying = true;
+    private boolean playerPlaying;
+    private Board board;
 
     //ToString metode
     @Override
@@ -17,39 +20,42 @@ public class Game {
 
 
     //konstruktør av spillere me validering, uten æ,ø,å akkurat nå. evnt gyldig med tall.
-    public Game(String player1, String player2, boolean startingPlayer, Board board) {
+    public Game(String player1, String player2, boolean startingPlayer,List<Integer> holes) {
         if (!Pattern.matches("[A-Za-z ]*", player1) && !Pattern.matches("[A-Za-z ]*", player1)) {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
         }
 
         this.player1 = player1;
         this.player2 = player2;
-        this.whoIsPlaying = startingPlayer;
+        this.playerPlaying = startingPlayer;
+        this.board = new Board(holes);
+        
     }
 //lag felt med board eller newBoard metode
 
 
 
-    public void playRound(Board board, int index) {
-
-        board.checkIfHome(board.playStones(index));
-
-
+    public void playRound(int index) {
+        //a
+        if (board.checkIfHome(board.playStones(index)) == false) {
+            changePlayer();
+            }
         }
 
 
         
-    }
 
 
-    public void playerPlaying() {
+    public void changePlayer() {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
         // }
-        if (whoIsPlaying() == true) {
-            return false;
+        if (this.playerPlaying == true) {
+            this.playerPlaying = false;
         }
-        return true;
+        else {
+            this.playerPlaying = true;
+        }
     }
     
 
@@ -74,8 +80,11 @@ public class Game {
 
 
     public static void main(String[] args) {
-        Game game1 = new Game("Jon Pape", "Jarl", true);
-        System.out.println(game1);
+
+        Board board1 = new Board(Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 ));
+        System.out.println(board1);
+        board1.playStones(0);
+        System.out.println(board1);
     }
 
 
