@@ -10,12 +10,20 @@ public class Board {
     //ToString
     @Override
     public String toString() {
-        return "Board holes=" + holes;
+        return "[" + holes + "]";
     }
     
-    //konstruktør av tomt brett
-    public Board(List<Integer> holes) {
-        this.holes = holes;
+    //konstruktør av et brett med 6-4 steiner i hvert hull
+    public Board(int stones) {
+        if (stones == 6) {
+            this.holes = Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 );
+        } else if (stones == 5) {
+            this.holes = Arrays.asList(5,5,5,5,5,5, 0 , 5,5,5,5,5,5, 0 );
+        } else if (stones == 4) {
+            this.holes = Arrays.asList(4,4,4,4,4,4, 0 , 4,4,4,4,4,4, 0 );
+        } else {
+            throw new IllegalArgumentException("There can only be between 4-6 stones in each hole");
+        }
     }
 
     public void lastInHome(int index) {
@@ -87,7 +95,7 @@ public class Board {
 
 
     public static void main(String[] args) {
-        Board board1 = new Board(Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 ));
+        Board board1 = new Board(6);
         System.out.println(board1);
         board1.playStones(0);
         System.out.println(board1);

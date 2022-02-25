@@ -12,15 +12,25 @@ public class Game {
     private boolean playerPlaying;
     private Board board;
 
-    //ToString metode
+
+
+    // //ToString metode
+    // @Override
+    // public String toString() {
+    //     return "Spillet består av " + player1 + " og " + player2 + ", og " + player1 + " starter!";
+    // }
+
+
     @Override
     public String toString() {
-        return "Spillet består av " + player1 + " og " + player2 + ", og " + player1 + " starter!";
+        return "Game [board=" + board + ", player1=" + player1 + ", player1Score=" + player1Score + ", player2="
+                + player2 + ", player2Score=" + player2Score + ", playerPlaying=" + playerPlaying + "]";
     }
 
 
+
     //konstruktør av spillere me validering, uten æ,ø,å akkurat nå. evnt gyldig med tall.
-    public Game(String player1, String player2, boolean startingPlayer,List<Integer> holes) {
+    public Game(String player1, String player2, boolean startingPlayer, int holes) {
         if (!Pattern.matches("[A-Za-z ]*", player1) && !Pattern.matches("[A-Za-z ]*", player1)) {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
         }
@@ -32,6 +42,12 @@ public class Game {
         
     }
 //lag felt med board eller newBoard metode
+
+
+
+
+
+
 
 
 
@@ -80,11 +96,14 @@ public class Game {
 
 
     public static void main(String[] args) {
-
-        Board board1 = new Board(Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 ));
-        System.out.println(board1);
-        board1.playStones(0);
-        System.out.println(board1);
+        Game game = new Game("Jon", "Jarl", true, 6);
+        // Board board1 = new Board(6);
+        // System.out.println(board1);
+        // board1.playStones(0);
+        // System.out.println(board1);
+        System.out.println(game);
+        game.playRound(0);
+        System.out.println(game);
     }
 
 
