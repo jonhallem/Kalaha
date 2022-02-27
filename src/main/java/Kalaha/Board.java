@@ -39,6 +39,8 @@ public class Board {
                     // if (i == 6 || i == 13) {
                     //     playStones(i);
 
+
+    //settere og gettere for steiner i hull
     public void setStones(int hole, int value) {
         this.holes.set(hole, value);
     }
@@ -63,7 +65,7 @@ public class Board {
           
     // }
 
-    public void playStones(int index) {
+    public void placeStones(int index) {
         int endIndex = (getStones(index)+index);
         setStones(index, 0);
         for (int i = (index); i < endIndex;) {
@@ -93,7 +95,7 @@ public class Board {
     public static void main(String[] args) {
         Board board1 = new Board(6);
         System.out.println(board1);
-        board1.playStones(9);
+        board1.placeStones(9);
         System.out.println(board1);
     }
 }

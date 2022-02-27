@@ -54,15 +54,23 @@ public class Game {
     public void playRound(int index) {
         
         isValidHole(index);
+        board.placeStones(index);
 
 
-        if (board.checkIfHome(board.playStones(index)) == false) {
-            changePlayer();
-            }
+
         }
 
 
         
+    private void name() {
+        
+    }
+
+    
+
+    public boolean getPlayerPlaying() {
+        return playerPlaying;
+    }
 
 
     public void changePlayer() {
@@ -79,30 +87,26 @@ public class Game {
     
     public void isValidHole(int index) {
         if (playerPlaying == true) {
-            if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5) {
-                return;
+            if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
+                throw new IllegalArgumentException("You can't choose enemy holes or homes.");
             } 
         }else if (playerPlaying == false) {
-            if (index == 7 || index == 8 || index == 9 || index == 10 || index == 11 || index == 12) {
-                return;
+            if (index != 7 && index != 8 && index != 9 && index != 10 && index != 11 && index != 12) {
+                throw new IllegalArgumentException("You can't choose enemy holes or homes.");
             } 
-        } else {
-            throw new IllegalArgumentException("You can not choose enemy holes or homes.");
         }
     }
 
 
-
-
-
-
-
+    public void updateScore() {
+        this.player1Score = board.getStones(6);
+        this.player2Score = board.getStones(14);
+    }
 
     //getters
     public String getPlayer1() {
         return player1;
     }
-
 
     public String getPlayer2() {
         return player2;
@@ -117,7 +121,7 @@ public class Game {
         // board1.playStones(0);
         // System.out.println(board1);
         System.out.println(game);
-        game.playRound(9);
+        game.playRound(5);
         System.out.println(game);
     }
 
