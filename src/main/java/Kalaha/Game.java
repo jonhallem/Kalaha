@@ -56,6 +56,8 @@ public class Game {
         isValidHole(index);
         board.placeStones(index);
 
+        updateScore();
+
 
 
         }
@@ -100,7 +102,7 @@ public class Game {
 
     public void updateScore() {
         this.player1Score = board.getStones(6);
-        this.player2Score = board.getStones(14);
+        this.player2Score = board.getStones(13);
     }
 
     //getters
