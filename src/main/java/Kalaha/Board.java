@@ -48,38 +48,34 @@ public class Board {
     }
 
     // public void playStones(int index) {
-    //     int i = index+1;
-    //     while (i <= getStones(index)) {
+    //     int i = index;
+    //     int hole = index+i;
+    //     while (i < (getStones(index))) {
+    //         i++;
     //         System.out.println("dette er hull " + i);
 
     //         //for each iteration update hole with 1 more stone
-    //         setStones(i, getStones(i)+1);
+    //         setStones(i+index, getStones(i)+1);
     //         System.out.println(this.holes);
-    //         i++;
+            
     //     } 
     //     System.out.println(i);
           
     // }
 
-    public int playStones(int index) {
-        int initialIndex = getStones(index);
-        for (int i = (index+1); i <= initialIndex; i++) {
+    public void playStones(int index) {
+        int endIndex = (getStones(index)+index);
+        setStones(index, 0);
+        for (int i = (index); i < endIndex;) {
+            i++;
+            if (i == 14) { endIndex = endIndex-i; i = 0; }
             System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
             setStones(i, getStones(i)+1);
             System.out.println(this.holes);
-            
-            
-            if (i == initialIndex) {
-                return i;  
-            }
-             
-            
-            }
-            return 0;
         }
-   
+    }
 
     public boolean checkIfHome(int i) {
             if (i == 6 || i == 13) {
@@ -97,7 +93,7 @@ public class Board {
     public static void main(String[] args) {
         Board board1 = new Board(6);
         System.out.println(board1);
-        board1.playStones(0);
+        board1.playStones(9);
         System.out.println(board1);
     }
 }

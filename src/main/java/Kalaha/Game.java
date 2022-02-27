@@ -52,7 +52,10 @@ public class Game {
 
 
     public void playRound(int index) {
-        //a
+        
+        isValidHole(index);
+
+
         if (board.checkIfHome(board.playStones(index)) == false) {
             changePlayer();
             }
@@ -74,7 +77,19 @@ public class Game {
         }
     }
     
-
+    public void isValidHole(int index) {
+        if (playerPlaying == true) {
+            if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5) {
+                return;
+            } 
+        }else if (playerPlaying == false) {
+            if (index == 7 || index == 8 || index == 9 || index == 10 || index == 11 || index == 12) {
+                return;
+            } 
+        } else {
+            throw new IllegalArgumentException("You can not choose enemy holes or homes.");
+        }
+    }
 
 
 
@@ -102,7 +117,7 @@ public class Game {
         // board1.playStones(0);
         // System.out.println(board1);
         System.out.println(game);
-        game.playRound(0);
+        game.playRound(9);
         System.out.println(game);
     }
 
