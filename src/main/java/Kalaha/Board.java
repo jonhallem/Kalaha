@@ -103,9 +103,9 @@ public class Board {
             int stolen = getStones((12-index));
             setStones((12-index), 0);
             if (index == 0 && index == 1 && index == 2 && index == 3 && index == 4 && index == 5) {
-                setStones(6, stolen);
+                setStones(6, getStones(6)+stolen);
             } else {
-                setStones(13, stolen);
+                setStones(13, getStones(13)+stolen);
             }
 
         }

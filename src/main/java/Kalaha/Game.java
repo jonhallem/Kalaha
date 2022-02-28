@@ -137,13 +137,14 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game("Jon", "Jarl", true, 6);
-        // Board board1 = new Board(6);
-        // System.out.println(board1);
-        // board1.playStones(0);
-        // System.out.println(board1);
         System.out.println(game);
         game.playRound(0);
+        game.playRound(1);
+        game.playRound(2);
+        game.playRound(3);
+        game.playRound(4);
+        game.playRound(5);
         System.out.println(game);
     }
-    
+
 }
