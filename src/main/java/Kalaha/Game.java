@@ -2,6 +2,9 @@ package Kalaha;
 
 import java.util.regex.Pattern;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 public class Game {
     private String player1;
     private String player2;
@@ -118,6 +121,20 @@ public class Game {
         this.player1Score = board.getStones(6);
         this.player2Score = board.getStones(13);
     }
+
+    
+
+    public String getPlayer1Score() {
+        return String.valueOf(player1Score);
+    }
+
+
+
+    public String getPlayer2Score() {
+        return String.valueOf(player2Score);
+    }
+
+
 
     //getters
     public String getPlayer1() {

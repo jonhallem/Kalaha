@@ -15,8 +15,8 @@ public class KalahaApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Example App");
-        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("App.fxml"))));
+        primaryStage.setTitle("Kalaha");
+        primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("Kalaha.fxml"))));
         primaryStage.show();
     }
 
