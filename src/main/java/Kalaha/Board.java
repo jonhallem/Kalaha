@@ -2,15 +2,17 @@ package Kalaha;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Board {
     private List<Integer> holes;
+    private boolean anotherRound;
 
 
     //ToString
     @Override
     public String toString() {
-        return "[" + holes + "]";
+        return "[" + holes + anotherRound+ "]";
     }
     
     //konstruktør av et brett med 6-4 steiner i hvert hull
@@ -24,15 +26,16 @@ public class Board {
         } else {
             throw new IllegalArgumentException("There can only be between 4-6 stones in each hole");
         }
+        this.anotherRound = false;
     }
 
-    public void lastInHome(int index) {
-        if (index == 6 || index == 13) {
-            // if last stone placed in home, player gets another round
-            playStones(index);
-            int i = index+1;
-        }
-    }     
+    // public void lastInHome(int index) {
+    //     if (index == 6 || index == 13) {
+    //         // if last stone placed in home, player gets another round
+    //         playStones(index);
+    //         int i = index+1;
+    //     }
+    // }     
 
 
                     // //check if player
@@ -76,21 +79,45 @@ public class Board {
             //for each iteration update hole with 1 more stone
             setStones(i, getStones(i)+1);
             System.out.println(this.holes);
+
+            if (i == endIndex) {
+                checkIfEmpty(i);
+                checkIfHome(i);
+            }
+
+
         }
     }
 
-    public boolean checkIfHome(int i) {
-            if (i == 6 || i == 13) {
+    public void checkIfHome(int index) {
+            if (index == 6 || index == 13) {
                 // if last stone placed in home, player gets another round
-                return true;
+                this.setAnotherRound(true);
+            } 
+    }
+    
+
+    public void checkIfEmpty(int index) {
+        if (getStones(index) == 0) {
+            //steal stones from enemy hole across the board
+            int stolen = getStones((12-index));
+            setStones((12-index), 0);
+            if (index == 0 && index == 1 && index == 2 && index == 3 && index == 4 && index == 5) {
+                setStones(6, stolen);
+            } else {
+                setStones(13, stolen);
             }
-            return false;
+
+        }
     }
 
-    public void checkIfEmpty() {
-        
+    public boolean isAnotherRound() {
+        return anotherRound;
     }
 
+    public void setAnotherRound(boolean anotherRound) {
+        this.anotherRound = anotherRound;
+    }
 
     public static void main(String[] args) {
         Board board1 = new Board(6);

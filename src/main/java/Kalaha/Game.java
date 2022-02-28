@@ -57,8 +57,7 @@ public class Game {
         board.placeStones(index);
 
         updateScore();
-
-
+        changePlayer();
 
         }
 
@@ -70,20 +69,18 @@ public class Game {
 
     
 
-    public boolean getPlayerPlaying() {
-        return playerPlaying;
-    }
-
 
     public void changePlayer() {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
         // }
-        if (this.playerPlaying == true) {
-            this.playerPlaying = false;
-        }
-        else {
-            this.playerPlaying = true;
+        if (board.isAnotherRound() == false) {
+            if (this.playerPlaying == true) {
+                this.playerPlaying = false;
+            }
+            else {
+                this.playerPlaying = true;
+            }
         }
     }
     
@@ -100,6 +97,11 @@ public class Game {
     }
 
 
+
+    public void checkIfGameOver() {
+        //if one side of the board is empty, start end game process
+    }
+
     public void updateScore() {
         this.player1Score = board.getStones(6);
         this.player2Score = board.getStones(13);
@@ -114,6 +116,11 @@ public class Game {
         return player2;
     }
 
+    public boolean getPlayerPlaying() {
+        return playerPlaying;
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -123,7 +130,7 @@ public class Game {
         // board1.playStones(0);
         // System.out.println(board1);
         System.out.println(game);
-        game.playRound(5);
+        game.playRound(0);
         System.out.println(game);
     }
 
