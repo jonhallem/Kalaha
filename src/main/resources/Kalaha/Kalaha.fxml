@@ -93,19 +93,17 @@
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="home2" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Player 2 Home" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="home13" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Player 2 Home" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font name="DIN Condensed Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="home1" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Player 1 Home" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="8" GridPane.rowIndex="2">
+            <Button fx:id="home6" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Player 1 Home" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="8" GridPane.rowIndex="2">
                <font>
                   <Font name="DIN Condensed Bold" size="14.0" />
                </font>
             </Button>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-            <Label fx:id="score2" alignment="CENTER" contentDisplay="CENTER" prefHeight="82.0" prefWidth="61.0" text="Score player 2" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label fx:id="score1" alignment="CENTER" contentDisplay="CENTER" prefHeight="82.0" prefWidth="61.0" text="Score player 1" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
             <Label fx:id="hole00" prefHeight="89.0" prefWidth="63.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>

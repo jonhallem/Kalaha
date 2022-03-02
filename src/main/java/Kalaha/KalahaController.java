@@ -11,10 +11,10 @@ public class KalahaController {
     private Board board;
 
     @FXML
-    private Label score1;
+    private Button home6;
 
     @FXML
-    private Label score2;
+    private Button home13;
 
     @FXML
     public Label hole00;
@@ -122,24 +122,24 @@ public class KalahaController {
     }
 
     public void updateScore() {
-        score1.setText(game.getPlayer1Score());
-        score2.setText(game.getPlayer2Score());
+        home6.setText(game.getPlayer1Score());
+        home13.setText(game.getPlayer2Score());
     }
 
     public void updateHoles() {
-        hole00.setText(String.valueOf(board.getStones(0)));
+        hole0.setText(board.toString());
         hole1.setText(String.valueOf(board.getStones(1)));
         hole2.setText(String.valueOf(board.getStones(2)));
         hole3.setText(String.valueOf(board.getStones(3)));
         hole4.setText(String.valueOf(board.getStones(4)));
         hole5.setText(String.valueOf(board.getStones(6)));
 
-        hole0.setText(String.valueOf(board.getStones(7)));
-        hole1.setText(String.valueOf(board.getStones(8)));
-        hole2.setText(String.valueOf(board.getStones(9)));
-        hole3.setText(String.valueOf(board.getStones(10)));
-        hole4.setText(String.valueOf(board.getStones(11)));
-        hole5.setText(String.valueOf(board.getStones(12)));
+        hole7.setText(String.valueOf(board.getStones(7)));
+        hole8.setText(String.valueOf(board.getStones(8)));
+        hole9.setText(String.valueOf(board.getStones(9)));
+        hole10.setText(String.valueOf(board.getStones(10)));
+        hole11.setText(String.valueOf(board.getStones(11)));
+        hole12.setText(String.valueOf(board.getStones(12)));
     }
 
 

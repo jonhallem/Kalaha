@@ -68,13 +68,15 @@ public class Game {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
         // }
-        if (board.isAnotherRound() == false) {
-            if (this.playerPlaying == true) {
-                this.playerPlaying = false;
-            }
-            else {
-                this.playerPlaying = true;
-            }
+        if (board.isAnotherRound() == true) {
+            //If anotherRound is set to true, do not change player
+            return;
+        }
+        if (this.playerPlaying == true) {
+            this.playerPlaying = false;
+        }
+        else {
+            this.playerPlaying = true;
         }
     }
     
@@ -157,10 +159,9 @@ public class Game {
         System.out.println(game);
         game.playRound(0);
         game.playRound(1);
+        game.playRound(7);
         game.playRound(2);
-        game.playRound(3);
-        game.playRound(4);
-        game.playRound(5);
+        game.playRound(8);
         System.out.println(game);
     }
 

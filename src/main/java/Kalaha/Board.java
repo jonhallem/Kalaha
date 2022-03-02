@@ -18,7 +18,7 @@ public class Board {
     //konstruktør av et brett med 6-4 steiner i hvert hull
     public Board(int stones) {
         if (stones == 6) {
-            this.holes = Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 );
+            this.holes = Arrays.asList(6,6,6,3,3,6, 0 , 6,6,6,6,6,6, 0 );
         } else if (stones == 5) {
             this.holes = Arrays.asList(5,5,5,5,5,5, 0 , 5,5,5,5,5,5, 0 );
         } else if (stones == 4) {
@@ -93,7 +93,9 @@ public class Board {
             if (index == 6 || index == 13) {
                 // if last stone placed in home, player gets another round
                 this.setAnotherRound(true);
-            } 
+            } else {
+                this.setAnotherRound(false);
+            }
     }
     
 
