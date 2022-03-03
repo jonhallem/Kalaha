@@ -117,7 +117,8 @@ public class KalahaController {
     }
 
     public void hole12() {
-
+        game.playRound(11);
+        updateScore();
         updateHoles();
     }
 
@@ -127,12 +128,12 @@ public class KalahaController {
     }
 
     public void updateHoles() {
-        hole0.setText(board.toString());
+        hole0.setText(String.valueOf(board.getStones(0)));
         hole1.setText(String.valueOf(board.getStones(1)));
         hole2.setText(String.valueOf(board.getStones(2)));
         hole3.setText(String.valueOf(board.getStones(3)));
         hole4.setText(String.valueOf(board.getStones(4)));
-        hole5.setText(String.valueOf(board.getStones(6)));
+        hole5.setText(String.valueOf(board.getStones(5)));
 
         hole7.setText(String.valueOf(board.getStones(7)));
         hole8.setText(String.valueOf(board.getStones(8)));
