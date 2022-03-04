@@ -46,7 +46,6 @@ public class KalahaController {
 
     public void initialize() {
         game = new Game("Jon", "Jarl", true, 6);
-        board = new Board(6);
     }
 
     public void hole0() {
@@ -128,19 +127,19 @@ public class KalahaController {
     }
 
     public void updateHoles() {
-        hole0.setText(String.valueOf(board.getStones(0)));
-        hole1.setText(String.valueOf(board.getStones(1)));
-        hole2.setText(String.valueOf(board.getStones(2)));
-        hole3.setText(String.valueOf(board.getStones(3)));
-        hole4.setText(String.valueOf(board.getStones(4)));
-        hole5.setText(String.valueOf(board.getStones(5)));
+        hole0.setText(String.valueOf(game.getBoard().getStones(0)));
+        hole1.setText(String.valueOf(game.getBoard().getStones(1)));
+        hole2.setText(String.valueOf(game.getBoard().getStones(2)));
+        hole3.setText(String.valueOf(game.getBoard().getStones(3)));
+        hole4.setText(String.valueOf(game.getBoard().getStones(4)));
+        hole5.setText(String.valueOf(game.getBoard().getStones(5)));
 
-        hole7.setText(String.valueOf(board.getStones(7)));
-        hole8.setText(String.valueOf(board.getStones(8)));
-        hole9.setText(String.valueOf(board.getStones(9)));
-        hole10.setText(String.valueOf(board.getStones(10)));
-        hole11.setText(String.valueOf(board.getStones(11)));
-        hole12.setText(String.valueOf(board.getStones(12)));
+        hole7.setText(String.valueOf(game.getBoard().getStones(7)));
+        hole8.setText(String.valueOf(game.getBoard().getStones(8)));
+        hole9.setText(String.valueOf(game.getBoard().getStones(9)));
+        hole10.setText(String.valueOf(game.getBoard().getStones(10)));
+        hole11.setText(String.valueOf(game.getBoard().getStones(11)));
+        hole12.setText(String.valueOf(game.getBoard().getStones(12)));
     }
 
 

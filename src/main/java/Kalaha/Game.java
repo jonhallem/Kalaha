@@ -151,6 +151,9 @@ public class Game {
         return playerPlaying;
     }
 
+    public Board getBoard() {
+        return board;
+    }
 
 
 
