@@ -2,13 +2,34 @@ package Kalaha;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class KalahaController {
 
     private Game game;
-    private Board board;
+
+    @FXML
+    private Label info;
+
+    @FXML
+    private TextArea player1Name;
+
+    @FXML
+    private TextArea player2Name;
+
+    @FXML
+    private CheckBox playerStarting;
+
+    @FXML
+    private TextField startingStones;
+
+    @FXML
+    private Button startGame;
 
     @FXML
     private Button home6;
@@ -45,9 +66,17 @@ public class KalahaController {
 
 
     public void initialize() {
-        game = new Game("Jon", "Jarl", true, 6);
     }
 
+    public void startGame() {
+        game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), Integer.parseInt(startingStones.getText()));
+        info.setText("Game created!");
+        player1Name.setVisible(false);
+        player2Name.setVisible(false);
+        playerStarting.setVisible(false);
+        startingStones.setVisible(false);
+        startGame.setVisible(false);
+    } 
     public void hole0() {
         game.playRound(0);
         updateScore();
@@ -116,7 +145,7 @@ public class KalahaController {
     }
 
     public void hole12() {
-        game.playRound(11);
+        game.playRound(12);
         updateScore();
         updateHoles();
     }
@@ -124,6 +153,14 @@ public class KalahaController {
     public void updateScore() {
         home6.setText(game.getPlayer1Score());
         home13.setText(game.getPlayer2Score());
+        if (game.getBoard().getPlayerPlaying() == true) {
+            info.setText("It is " + game.getPlayer1() + "'s turn!");
+            info.setTextFill(Color.GREEN);
+        } else {
+            info.setText("It is " + game.getPlayer2() + "'s turn!");
+            info.setTextFill(Color.RED);
+        }
+        
     }
 
     public void updateHoles() {
