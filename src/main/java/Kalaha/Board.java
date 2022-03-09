@@ -74,16 +74,18 @@ public class Board {
         for (int i = (index); i < endIndex;) {
             i++;
             if (i == 14) { endIndex = endIndex-i; i = 0; }
+            if (i == endIndex) {
+                checkIfEmpty(i);
+                checkIfHome(i);
+            }
+
             System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
             setStones(i, getStones(i)+1);
             System.out.println(this.holes);
 
-            if (i == endIndex) {
-                checkIfEmpty(i);
-                checkIfHome(i);
-            }
+
 
 
         }
@@ -102,9 +104,10 @@ public class Board {
     public void checkIfEmpty(int index) {
         if (getStones(index) == 0) {
             //steal stones from enemy hole across the board
-            int stolen = getStones((12-index));
+            int stolen = getStones((12-index))+1;
             setStones((12-index), 0);
-            if (index == 0 && index == 1 && index == 2 && index == 3 && index == 4 && index == 5) {
+            setStones(index, -1);
+            if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5) {
                 setStones(6, getStones(6)+stolen);
             } else {
                 setStones(13, getStones(13)+stolen);

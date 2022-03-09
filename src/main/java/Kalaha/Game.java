@@ -163,8 +163,7 @@ public class Game {
         game.playRound(0);
         game.playRound(1);
         game.playRound(7);
-        game.playRound(2);
-        game.playRound(8);
+        game.playRound(0);
         System.out.println(game);
     }
 
