@@ -10,7 +10,6 @@ public class Game {
     private String player2;
     private int player1Score = 0;
     private int player2Score = 0;
-    private boolean playerPlaying;
     private Board board;
 
 
@@ -38,18 +37,9 @@ public class Game {
 
         this.player1 = player1;
         this.player2 = player2;
-        this.playerPlaying = startingPlayer;
-        this.board = new Board(holes);
+        this.board = new Board(holes, startingPlayer);
         
     }
-//lag felt med board eller newBoard metode
-
-
-
-
-
-
-
 
 
     public void playRound(int index) {
@@ -72,20 +62,20 @@ public class Game {
             //If anotherRound is set to true, do not change player
             return;
         }
-        if (this.playerPlaying == true) {
-            this.playerPlaying = false;
+        if (board.getPlayerPlaying() == true) {
+            board.setPlayerPlaying(false);
         }
         else {
-            this.playerPlaying = true;
+            board.setPlayerPlaying(true);
         }
     }
     
     public void isValidHole(int index) {
-        if (playerPlaying == true) {
+        if (board.getPlayerPlaying() == true) {
             if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
                 throw new IllegalArgumentException("You can't choose enemy holes or homes.");
             } 
-        }else if (playerPlaying == false) {
+        }else if (board.getPlayerPlaying() == false) {
             if (index != 7 && index != 8 && index != 9 && index != 10 && index != 11 && index != 12) {
                 throw new IllegalArgumentException("You can't choose enemy holes or homes.");
             } 
@@ -145,10 +135,6 @@ public class Game {
 
     public String getPlayer2() {
         return player2;
-    }
-
-    public boolean getPlayerPlaying() {
-        return playerPlaying;
     }
 
     public Board getBoard() {

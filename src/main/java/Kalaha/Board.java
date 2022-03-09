@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class Board {
     private List<Integer> holes;
     private boolean anotherRound;
+    private boolean playerPlaying;
 
 
     //ToString
@@ -16,7 +17,7 @@ public class Board {
     }
     
     //konstruktør av et brett med 6-4 steiner i hvert hull
-    public Board(int stones) {
+    public Board(int stones, boolean startingPlayer) {
         if (stones == 6) {
             this.holes = Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 );
         } else if (stones == 5) {
@@ -27,6 +28,9 @@ public class Board {
             throw new IllegalArgumentException("There can only be between 4-6 stones in each hole");
         }
         this.anotherRound = false;
+
+        //Here I can add different player starting mechanic (Have i?)
+        this.playerPlaying = startingPlayer;
     }
 
     // public void lastInHome(int index) {
@@ -92,10 +96,14 @@ public class Board {
     }
 
     public void checkIfHome(int index) {
-            if (index == 6 || index == 13) {
-                // if last stone placed in home, player gets another round
+            if (index == 6 && getPlayerPlaying() == true) {
+                // if last stone placed in player 1 home, player 1 gets another round
                 this.setAnotherRound(true);
-            } else {
+            } else if (index == 13 && getPlayerPlaying() == false) {
+                // if last stone placed in player 2 home, player 2 gets another round
+                this.setAnotherRound(true);
+            }
+            else {
                 this.setAnotherRound(false);
             }
     }
@@ -103,12 +111,25 @@ public class Board {
 
     public void checkIfEmpty(int index) {
         if (getStones(index) == 0) {
+
+            if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5) {
+                if (getPlayerPlaying() != true) {
+                    return;      
+                }
+            } else {
+                if (getPlayerPlaying() == !false) {
+                    return;
+                }
+            }
+
             //steal stones from enemy hole across the board
             int stolen = getStones((12-index))+1;
             setStones((12-index), 0);
             setStones(index, -1);
+            //check if valid hole to run stealmechanic AND if it is a valid player
             if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5) {
-                setStones(6, getStones(6)+stolen);
+                setStones(6, getStones(6)+stolen);        
+
             } else {
                 setStones(13, getStones(13)+stolen);
             }
@@ -122,6 +143,16 @@ public class Board {
 
     public void setAnotherRound(boolean anotherRound) {
         this.anotherRound = anotherRound;
+    }
+
+
+
+    public boolean getPlayerPlaying() {
+        return playerPlaying;
+    }
+
+    public void setPlayerPlaying(boolean playerPlaying) {
+        this.playerPlaying = playerPlaying;
     }
 
     public static void main(String[] args) {
