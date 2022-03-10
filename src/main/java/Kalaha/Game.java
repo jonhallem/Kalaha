@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class Game {
+    private boolean gameOver;
     private String player1;
     private String player2;
     private int player1Score = 0;
@@ -24,7 +25,7 @@ public class Game {
     @Override
     public String toString() {
         return "Game [board=" + board + ", player1=" + player1 + ", player1Score=" + player1Score + ", player2="
-                + player2 + ", player2Score=" + player2Score + ", playerPlaying=" + playerPlaying + "]";
+                + player2 + ", player2Score=" + player2Score + ", playerPlaying=" + "]";
     }
 
 
@@ -35,6 +36,7 @@ public class Game {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
         }
 
+        this.gameOver = false;
         this.player1 = player1;
         this.player2 = player2;
         this.board = new Board(holes, startingPlayer);
@@ -94,6 +96,7 @@ public class Game {
             int home = board.getStones(6);
             board.setStones(6, home+enemyStones);
 
+            setGameOver();
             updateScore();
             System.out.println("Game is over.");
         } else if (board.getStones(7) == 0 && board.getStones(8) == 0 && board.getStones(9) == 0 && board.getStones(10) == 0 && board.getStones(11) == 0 && board.getStones(12) == 0) {
@@ -104,6 +107,7 @@ public class Game {
             int home = board.getStones(13);
             board.setStones(13, home+enemyStones);
 
+            setGameOver();
             updateScore();
             System.out.println("Game is over.");
         }
@@ -139,6 +143,14 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public boolean getGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver() {
+        this.gameOver = true;
     }
 
 

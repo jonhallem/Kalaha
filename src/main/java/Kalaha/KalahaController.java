@@ -155,10 +155,22 @@ public class KalahaController {
         home13.setText(game.getPlayer2Score());
         if (game.getBoard().getPlayerPlaying() == true) {
             info.setText("It is " + game.getPlayer1() + "'s turn!");
-            info.setTextFill(Color.GREEN);
+            info.setStyle("-fx-background-color: green;");
         } else {
             info.setText("It is " + game.getPlayer2() + "'s turn!");
-            info.setTextFill(Color.RED);
+            info.setStyle("-fx-background-color: red;");
+        }
+
+        if (game.getGameOver() == true) {
+            hole0.setDisable(true); hole1.setDisable(true); hole2.setDisable(true); hole3.setDisable(true); hole4.setDisable(true); hole5.setDisable(true); 
+            hole7.setDisable(true); hole8.setDisable(true); hole9.setDisable(true); hole10.setDisable(true); hole11.setDisable(true); hole12.setDisable(true); 
+            info.setStyle("-fx-background-color: yellow;");
+            
+            if (Integer.parseInt(game.getPlayer1Score()) > Integer.parseInt(game.getPlayer2Score())) {
+                info.setText("The game is over! " + game.getPlayer1() + " won!");
+            } else {
+                info.setText("The game is over! " + game.getPlayer2() + " won!");
+            }
         }
         
     }

@@ -100,7 +100,7 @@
                   <Font name="DIN Condensed Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="home6" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" style="-fx-background-color: green; -fx-font-style: 100%;" text="Player 1 Home" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="8" GridPane.rowIndex="2">
+            <Button fx:id="home6" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" style="-fx-background-color: green;" text="Player 1 Home" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="8" GridPane.rowIndex="2">
                <font>
                   <Font name="DIN Condensed Bold" size="14.0" />
                </font>
@@ -111,8 +111,11 @@
                   <TextField fx:id="startingStones" layoutX="-50.0" layoutY="40.0" promptText="Stone Number" text="6" />
                </children></Pane>
             <TextArea fx:id="player2Name" prefHeight="200.0" prefWidth="200.0" promptText="Player 2 Name" text="PlayerTwo" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <TextArea fx:id="player1Name" prefHeight="200.0" prefWidth="200.0" promptText="Player 1 Name" text="PlayerOne" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="119.0" text="Info" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.columnSpan="2147483647" />
+            <TextArea fx:id="player1Name" prefHeight="53.0" prefWidth="60.0" promptText="Player 1 Name" text="PlayerOne" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="600.0" text="Info" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2147483647">
+               <font>
+                  <Font size="23.0" />
+               </font></Label>
             <Button fx:id="startGame" mnemonicParsing="false" onAction="#startGame" prefHeight="26.0" prefWidth="85.0" text="Start game" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
          </children>
       </GridPane>
