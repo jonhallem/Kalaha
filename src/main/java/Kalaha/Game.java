@@ -13,21 +13,11 @@ public class Game {
     private int player2Score = 0;
     private Board board;
 
-
-
-    // //ToString metode
-    // @Override
-    // public String toString() {
-    //     return "Spillet består av " + player1 + " og " + player2 + ", og " + player1 + " starter!";
-    // }
-
-
     @Override
     public String toString() {
         return "Game [board=" + board + ", player1=" + player1 + ", player1Score=" + player1Score + ", player2="
                 + player2 + ", player2Score=" + player2Score + ", playerPlaying=" + "]";
     }
-
 
 
     //konstruktør av spillere me validering, uten æ,ø,å akkurat nå. evnt gyldig med tall.
@@ -43,7 +33,7 @@ public class Game {
         
     }
 
-
+    //main method for running a round
     public void playRound(int index) {
         
         isValidHole(index);
@@ -72,6 +62,7 @@ public class Game {
         }
     }
     
+    //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
     public void isValidHole(int index) {
         if (board.getPlayerPlaying() == true) {
             if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
@@ -113,26 +104,22 @@ public class Game {
         }
     }
 
+
+
+    //getters and setters
     public void updateScore() {
         this.player1Score = board.getStones(6);
         this.player2Score = board.getStones(13);
     }
 
-    
-
     public String getPlayer1Score() {
         return String.valueOf(player1Score);
     }
-
-
 
     public String getPlayer2Score() {
         return String.valueOf(player2Score);
     }
 
-
-
-    //getters
     public String getPlayer1() {
         return player1;
     }

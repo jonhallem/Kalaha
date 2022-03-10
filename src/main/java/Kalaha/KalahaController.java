@@ -4,23 +4,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.layout.GridPane;
 
 public class KalahaController {
 
     private Game game;
 
     @FXML
-    private Label info;
+    private GridPane background;
 
     @FXML
-    private TextArea player1Name;
+    private Label info, stoneLabel;
 
     @FXML
-    private TextArea player2Name;
+    private TextField player1Name, player2Name;
 
     @FXML
     private CheckBox playerStarting;
@@ -32,48 +30,25 @@ public class KalahaController {
     private Button startGame;
 
     @FXML
-    private Button home6;
+    private Button home6, home13;
 
     @FXML
-    private Button home13;
-
-    @FXML
-    public Label hole00;
-    @FXML
-    private Button hole0;
-    @FXML
-    public Button hole1;
-    @FXML
-    public Button hole2;
-    @FXML
-    public Button hole3;
-    @FXML
-    public Button hole4;
-    @FXML
-    public Button hole5;
-    @FXML
-    public Button hole7;
-    @FXML
-    public Button hole8;
-    @FXML
-    public Button hole9;
-    @FXML
-    public Button hole10;
-    @FXML
-    public Button hole11;
-    @FXML
-    public Button hole12;
-
+    private Button hole0, hole1, hole2, hole3, hole4, hole5, hole7, hole8, hole9, hole10, hole11, hole12;
 
     public void initialize() {
     }
 
     public void startGame() {
         game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), Integer.parseInt(startingStones.getText()));
-        info.setText("Game created!");
+        hole0.setDisable(false); hole1.setDisable(false); hole2.setDisable(false); hole3.setDisable(false); hole4.setDisable(false); hole5.setDisable(false); 
+        hole7.setDisable(false); hole8.setDisable(false); hole9.setDisable(false); hole10.setDisable(false); hole11.setDisable(false); hole12.setDisable(false); 
+        
+        showPlaying();
+        updateHoles();
         player1Name.setVisible(false);
         player2Name.setVisible(false);
         playerStarting.setVisible(false);
+        stoneLabel.setVisible(false);
         startingStones.setVisible(false);
         startGame.setVisible(false);
     } 
@@ -153,6 +128,11 @@ public class KalahaController {
     public void updateScore() {
         home6.setText(game.getPlayer1Score());
         home13.setText(game.getPlayer2Score());
+        showPlaying();
+        handleGameOver(); 
+    }
+
+    public void showPlaying() {
         if (game.getBoard().getPlayerPlaying() == true) {
             info.setText("It is " + game.getPlayer1() + "'s turn!");
             info.setStyle("-fx-background-color: green;");
@@ -160,12 +140,16 @@ public class KalahaController {
             info.setText("It is " + game.getPlayer2() + "'s turn!");
             info.setStyle("-fx-background-color: red;");
         }
+    }
 
+    public void handleGameOver() {
         if (game.getGameOver() == true) {
+            //disable buttons if game is over
             hole0.setDisable(true); hole1.setDisable(true); hole2.setDisable(true); hole3.setDisable(true); hole4.setDisable(true); hole5.setDisable(true); 
             hole7.setDisable(true); hole8.setDisable(true); hole9.setDisable(true); hole10.setDisable(true); hole11.setDisable(true); hole12.setDisable(true); 
             info.setStyle("-fx-background-color: yellow;");
-            
+
+            //post winner
             if (Integer.parseInt(game.getPlayer1Score()) > Integer.parseInt(game.getPlayer2Score())) {
                 info.setText("The game is over! " + game.getPlayer1() + " won!");
             } else {

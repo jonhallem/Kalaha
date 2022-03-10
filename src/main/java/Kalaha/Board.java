@@ -16,8 +16,9 @@ public class Board {
         return "[" + holes + anotherRound+ "]";
     }
     
-    //konstruktør av et brett med 6-4 steiner i hvert hull
+    // Constructor of a board with 4-6 stones in each hole
     public Board(int stones, boolean startingPlayer) {
+        //The most normal starting game options. 
         if (stones == 6) {
             this.holes = Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 );
         } else if (stones == 5) {
@@ -29,48 +30,9 @@ public class Board {
         }
         this.anotherRound = false;
 
-        //Here I can add different player starting mechanic (Have i?)
+        //Option to change who is the starting player
         this.playerPlaying = startingPlayer;
     }
-
-    // public void lastInHome(int index) {
-    //     if (index == 6 || index == 13) {
-    //         // if last stone placed in home, player gets another round
-    //         playStones(index);
-    //         int i = index+1;
-    //     }
-    // }     
-
-
-                    // //check if player
-                    // if (i == 6 || i == 13) {
-                    //     playStones(i);
-
-
-    //settere og gettere for steiner i hull
-    public void setStones(int hole, int value) {
-        this.holes.set(hole, value);
-    }
-
-    public int getStones(int index) {
-        return this.holes.get(index);
-    }
-
-    // public void playStones(int index) {
-    //     int i = index;
-    //     int hole = index+i;
-    //     while (i < (getStones(index))) {
-    //         i++;
-    //         System.out.println("dette er hull " + i);
-
-    //         //for each iteration update hole with 1 more stone
-    //         setStones(i+index, getStones(i)+1);
-    //         System.out.println(this.holes);
-            
-    //     } 
-    //     System.out.println(i);
-          
-    // }
 
     public void placeStones(int index) {
         int endIndex = (getStones(index)+index);
@@ -137,6 +99,16 @@ public class Board {
         }
     }
 
+
+    //settere og gettere for steiner i hull
+    public void setStones(int hole, int value) {
+        this.holes.set(hole, value);
+    }
+
+    public int getStones(int index) {
+        return this.holes.get(index);
+    }
+
     public boolean isAnotherRound() {
         return anotherRound;
     }
@@ -144,7 +116,6 @@ public class Board {
     public void setAnotherRound(boolean anotherRound) {
         this.anotherRound = anotherRound;
     }
-
 
 
     public boolean getPlayerPlaying() {

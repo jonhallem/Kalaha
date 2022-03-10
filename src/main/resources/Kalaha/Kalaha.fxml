@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Kalaha.KalahaController">
    <children>
-      <GridPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+      <GridPane fx:id="background" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -35,62 +34,62 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="hole0" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole0" style="-fx-background-color: palegreen;" text="Button" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button fx:id="hole0" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole0" style="-fx-background-color: palegreen;" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole1" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole1" style="-fx-background-color: palegreen;" text="Button" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <Button fx:id="hole1" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole1" style="-fx-background-color: palegreen;" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole2" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole2" style="-fx-background-color: palegreen;" text="Button" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <Button fx:id="hole2" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole2" style="-fx-background-color: palegreen;" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole3" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole3" style="-fx-background-color: palegreen;" text="Button" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <Button fx:id="hole3" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole3" style="-fx-background-color: palegreen;" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole4" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole4" style="-fx-background-color: palegreen;" text="Button" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="3">
+            <Button fx:id="hole4" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole4" style="-fx-background-color: palegreen;" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="6" GridPane.rowIndex="3">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole5" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole5" style="-fx-background-color: palegreen;" text="Button" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="3">
+            <Button fx:id="hole5" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole5" style="-fx-background-color: palegreen;" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="7" GridPane.rowIndex="3">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole12" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole12" style="-fx-background-color: palevioletred;" text="Button" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="hole12" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole12" style="-fx-background-color: palevioletred;" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole7" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole7" style="-fx-background-color: palevioletred;" text="Button" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
+            <Button fx:id="hole7" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole7" style="-fx-background-color: palevioletred;" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole8" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole8" style="-fx-background-color: palevioletred;" text="Button" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <Button fx:id="hole8" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole8" style="-fx-background-color: palevioletred;" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole9" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole9" style="-fx-background-color: palevioletred;" text="Button" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <Button fx:id="hole9" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole9" style="-fx-background-color: palevioletred;" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole10" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole10" style="-fx-background-color: palevioletred;" text="Button" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Button fx:id="hole10" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole10" style="-fx-background-color: palevioletred;" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="hole11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole11" style="-fx-background-color: palevioletred;" text="Button" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button fx:id="hole11" contentDisplay="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hole11" style="-fx-background-color: palevioletred;" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font name="DIN Condensed Bold" size="17.0" />
                </font>
@@ -108,16 +107,18 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <children>
                   <CheckBox fx:id="playerStarting" layoutX="-32.0" layoutY="14.0" mnemonicParsing="false" selected="true" text="Player 1 Starting" />
-                  <TextField fx:id="startingStones" layoutX="-50.0" layoutY="40.0" promptText="Stone Number" text="6" />
+                  <TextField fx:id="startingStones" layoutX="18.0" layoutY="40.0" prefHeight="26.0" prefWidth="60.0" promptText="Stone Number" text="6" />
                </children></Pane>
-            <TextArea fx:id="player2Name" prefHeight="200.0" prefWidth="200.0" promptText="Player 2 Name" text="PlayerTwo" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <TextArea fx:id="player1Name" prefHeight="53.0" prefWidth="60.0" promptText="Player 1 Name" text="PlayerOne" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" prefHeight="91.0" prefWidth="600.0" text="Info" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2147483647">
-               <font>
-                  <Font size="23.0" />
-               </font></Label>
             <Button fx:id="startGame" mnemonicParsing="false" onAction="#startGame" prefHeight="26.0" prefWidth="85.0" text="Start game" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.columnSpan="2147483647" GridPane.rowIndex="4" />
          </children>
       </GridPane>
+      <TextField fx:id="player1Name" layoutX="121.0" layoutY="334.0" prefHeight="0.0" prefWidth="120.0" promptText="Player 1 name" text="PlayerOne" />
+      <TextField fx:id="player2Name" layoutX="121.0" layoutY="366.0" prefHeight="26.0" prefWidth="120.0" promptText="Player 2 name" text="PlayerTwo" />
+      <Label fx:id="stoneLabel" layoutX="268.0" layoutY="359.0" prefHeight="26.0" prefWidth="51.0" text="Stones:" />
+      <Label fx:id="info" alignment="CENTER" contentDisplay="CENTER" layoutY="-1.0" prefHeight="80.0" prefWidth="600.0" text="Info" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
