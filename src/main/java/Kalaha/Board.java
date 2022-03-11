@@ -50,10 +50,6 @@ public class Board {
             //for each iteration update hole with 1 more stone
             setStones(i, getStones(i)+1);
             System.out.println(this.holes);
-
-
-
-
         }
     }
 

@@ -2,9 +2,6 @@ package Kalaha;
 
 import java.util.regex.Pattern;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
 public class Game {
     private boolean gameOver;
     private String player1;
@@ -63,15 +60,21 @@ public class Game {
     }
     
     //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
+    //you also can not pick an empty hole
     public void isValidHole(int index) {
+        
         if (board.getPlayerPlaying() == true) {
             if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
                 throw new IllegalArgumentException("You can't choose enemy holes or homes.");
-            } 
+            } else if (board.getStones(index) == 0) {
+                throw new IllegalArgumentException("You can't choose an empty hole!");
+            }
         }else if (board.getPlayerPlaying() == false) {
             if (index != 7 && index != 8 && index != 9 && index != 10 && index != 11 && index != 12) {
                 throw new IllegalArgumentException("You can't choose enemy holes or homes.");
-            } 
+            } else if (board.getStones(index) == 0) {
+                throw new IllegalArgumentException("You can't choose an empty hole!");
+            }
         }
     }
 
@@ -79,6 +82,16 @@ public class Game {
 
     public void checkIfGameOver() {
         //if one side of the board is empty, start end game process
+
+
+
+
+
+        //need check for player. player doing last move should get stones from enemy
+
+
+
+
         if (board.getStones(0) == 0 && board.getStones(1) == 0 && board.getStones(2) == 0 && board.getStones(3) == 0 && board.getStones(4) == 0 && board.getStones(6) == 0) {
             //find all enemy stones
             int enemyStones = board.getStones(7)+board.getStones(8)+board.getStones(9)+board.getStones(10)+board.getStones(11)+board.getStones(12);
