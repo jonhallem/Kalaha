@@ -3,6 +3,7 @@ package Kalaha;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -15,7 +16,7 @@ public class KalahaController {
     private GridPane background;
 
     @FXML
-    private Label info, stoneLabel;
+    private Label info, stoneLabel, feedBackLabel;
 
     @FXML
     private TextField player1Name, player2Name;
@@ -24,7 +25,8 @@ public class KalahaController {
     private CheckBox playerStarting;
 
     @FXML
-    private TextField startingStones;
+    private ComboBox<Integer> startingStones;
+    // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
 
     @FXML
     private Button startGame;
@@ -36,10 +38,19 @@ public class KalahaController {
     private Button hole0, hole1, hole2, hole3, hole4, hole5, hole7, hole8, hole9, hole10, hole11, hole12;
 
     public void initialize() {
+
+        startingStones.getItems().addAll(4,5,6);
+        startingStones.getSelectionModel().select(2);
     }
 
     public void startGame() {
-        game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), Integer.parseInt(startingStones.getText()));
+        try {
+            game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue());
+        } catch (Exception e) {
+            feedBackLabel.setText("Name can only contain letters and spaces!");
+            return;
+        }
+        
         hole0.setDisable(false); hole1.setDisable(false); hole2.setDisable(false); hole3.setDisable(false); hole4.setDisable(false); hole5.setDisable(false); 
         hole7.setDisable(false); hole8.setDisable(false); hole9.setDisable(false); hole10.setDisable(false); hole11.setDisable(false); hole12.setDisable(false); 
         
@@ -53,76 +64,127 @@ public class KalahaController {
         startGame.setVisible(false);
     } 
     public void hole0() {
+        try {
         game.playRound(0);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole1() {
+        try {
         game.playRound(1);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole2() {
+        try {
         game.playRound(2);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole3() {
+        try {
         game.playRound(3);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole4() {
+        try {
         game.playRound(4);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole5() {
+        try {
         game.playRound(5);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
 
     public void hole7() {
+        try {
         game.playRound(7);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole8() {
+        try {
         game.playRound(8);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole9() {
+        try {
         game.playRound(9);
         updateScore();
         updateHoles();
-    }
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+           }
+     }
 
     public void hole10() {
+    try {
         game.playRound(10);
         updateScore();
         updateHoles();
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+            }
+
     }
 
     public void hole11() {
+    try {
         game.playRound(11);
         updateScore();
         updateHoles();
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+            }
+
     }
 
-    public void hole12() {
+    public void hole12() { 
+    try {
         game.playRound(12);
         updateScore();
         updateHoles();
+        } catch (Exception e) {
+            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+            }
+
     }
 
     public void updateScore() {
@@ -159,7 +221,16 @@ public class KalahaController {
         
     }
 
+    // public void sleep() {
+    //     try {
+    //         Thread.sleep(100);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+
     public void updateHoles() {
+        feedBackLabel.setText("");
         hole0.setText(String.valueOf(game.getBoard().getStones(0)));
         hole1.setText(String.valueOf(game.getBoard().getStones(1)));
         hole2.setText(String.valueOf(game.getBoard().getStones(2)));

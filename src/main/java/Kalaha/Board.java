@@ -122,10 +122,4 @@ public class Board {
         this.playerPlaying = playerPlaying;
     }
 
-    public static void main(String[] args) {
-        Board board1 = new Board(6);
-        System.out.println(board1);
-        board1.placeStones(9);
-        System.out.println(board1);
-    }
 }

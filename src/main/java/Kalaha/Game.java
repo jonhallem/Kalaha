@@ -62,7 +62,7 @@ public class Game {
     //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
     //you also can not pick an empty hole
     public void isValidHole(int index) {
-        
+
         if (board.getPlayerPlaying() == true) {
             if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
                 throw new IllegalArgumentException("You can't choose enemy holes or homes.");
@@ -82,23 +82,14 @@ public class Game {
 
     public void checkIfGameOver() {
         //if one side of the board is empty, start end game process
-
-
-
-
-
-        //need check for player. player doing last move should get stones from enemy
-
-
-
-
-        if (board.getStones(0) == 0 && board.getStones(1) == 0 && board.getStones(2) == 0 && board.getStones(3) == 0 && board.getStones(4) == 0 && board.getStones(6) == 0) {
+        //when one player has no stones on their side, the enemy picks up all the remaining stones on their side and puts them in their home
+        if (board.getStones(0) == 0 && board.getStones(1) == 0 && board.getStones(2) == 0 && board.getStones(3) == 0 && board.getStones(4) == 0 && board.getStones(5) == 0) {
             //find all enemy stones
             int enemyStones = board.getStones(7)+board.getStones(8)+board.getStones(9)+board.getStones(10)+board.getStones(11)+board.getStones(12);
-            //remove all enemy stones and add them to the home
+            //remove all enemy stones and add them to their home
             board.setStones(7, 0); board.setStones(8, 0); board.setStones(9, 0); board.setStones(10, 0); board.setStones(11, 0); board.setStones(12, 0);
-            int home = board.getStones(6);
-            board.setStones(6, home+enemyStones);
+            int enemyhome = board.getStones(13);
+            board.setStones(13, enemyhome+enemyStones);
 
             setGameOver();
             updateScore();
@@ -106,10 +97,10 @@ public class Game {
         } else if (board.getStones(7) == 0 && board.getStones(8) == 0 && board.getStones(9) == 0 && board.getStones(10) == 0 && board.getStones(11) == 0 && board.getStones(12) == 0) {
             //find all enemy stones
             int enemyStones = board.getStones(0)+board.getStones(1)+board.getStones(2)+board.getStones(3)+board.getStones(4)+board.getStones(5);
-            //remove all enemy stones and add them to the home
+            //remove all enemy stones and add them to their home
             board.setStones(0, 0); board.setStones(1, 0); board.setStones(2, 0); board.setStones(3, 0); board.setStones(4, 0); board.setStones(5, 0);
-            int home = board.getStones(13);
-            board.setStones(13, home+enemyStones);
+            int enemyhome = board.getStones(6);
+            board.setStones(6, enemyhome+enemyStones);
 
             setGameOver();
             updateScore();
