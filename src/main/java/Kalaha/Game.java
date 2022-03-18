@@ -47,7 +47,7 @@ public class Game {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
         // }
-        if (board.isAnotherRound() == true) {
+        if (board.getAnotherRound() == true) {
             //If anotherRound is set to true, do not change player
             return;
         }
@@ -152,7 +152,11 @@ public class Game {
         game.playRound(0);
         game.playRound(1);
         game.playRound(7);
-        game.playRound(0);
+        game.playRound(2);
+        game.playRound(8);
+        game.playRound(3);
+        game.playRound(9);
+        game.playRound(4);
         System.out.println(game);
     }
 

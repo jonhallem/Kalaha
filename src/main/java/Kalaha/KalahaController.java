@@ -1,11 +1,15 @@
 package Kalaha;
 
+import java.io.FileNotFoundException;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
 public class KalahaController {
@@ -19,7 +23,7 @@ public class KalahaController {
     private Label info, stoneLabel, feedBackLabel;
 
     @FXML
-    private TextField player1Name, player2Name;
+    private TextField player1Name, player2Name, loadInput;
 
     @FXML
     private CheckBox playerStarting;
@@ -29,7 +33,7 @@ public class KalahaController {
     // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
 
     @FXML
-    private Button startGame;
+    private Button startGame, loadButton, saveButton;
 
     @FXML
     private Button home6, home13;
@@ -63,13 +67,49 @@ public class KalahaController {
         startingStones.setVisible(false);
         startGame.setVisible(false);
     } 
+
+
+    public void loadGame() {
+        SaveHandler saveHandler = new SaveHandler();
+        try {
+            saveHandler.readSave(loadInput.getText(), game);
+            System.out.println("vellykket opplastning");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println("feil i opplastning");
+        }
+    }
+
+    public void saveGame() {
+        SaveHandler saveHandler = new SaveHandler();
+        try {
+            saveHandler.writeSave(loadInput.getText(), game);
+            System.out.println("vellykket lagring");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println("feil i lagring");
+        }
+    }
+
+    private void showErrorMessage(String message) {
+// er invocationTargetException
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Unvalid hole");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     public void hole0() {
         try {
         game.playRound(0);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
+            feedBackLabel.setText(e.getMessage());
+            showErrorMessage(e.getMessage());
            }
      }
 
@@ -214,7 +254,10 @@ public class KalahaController {
             //post winner
             if (Integer.parseInt(game.getPlayer1Score()) > Integer.parseInt(game.getPlayer2Score())) {
                 info.setText("The game is over! " + game.getPlayer1() + " won!");
-            } else {
+            } else if (Integer.parseInt(game.getPlayer1Score()) == Integer.parseInt(game.getPlayer2Score())) {
+                info.setText("The game is over! It is a draw!");
+            }
+             else {
                 info.setText("The game is over! " + game.getPlayer2() + " won!");
             }
         }

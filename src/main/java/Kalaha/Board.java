@@ -18,7 +18,8 @@ public class Board {
     
     // Constructor of a board with 4-6 stones in each hole
     public Board(int stones, boolean startingPlayer) {
-        //The most normal starting game options. 
+        //The most normal starting game options.
+        //Can shorten this to any stone 
         if (stones == 6) {
             this.holes = Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 );
         } else if (stones == 5) {
@@ -39,7 +40,11 @@ public class Board {
         setStones(index, 0);
         for (int i = (index); i < endIndex;) {
             i++;
-            if (i == 14) { endIndex = endIndex-i; i = 0; }
+            //restart index when iterating past index
+            if (i >= 14) { endIndex = endIndex-i; i = 0; }
+
+
+            //check if last stone is placed in empty or home
             if (i == endIndex) {
                 checkIfEmpty(i);
                 checkIfHome(i);
@@ -48,10 +53,23 @@ public class Board {
             System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
-            setStones(i, getStones(i)+1);
+            //but only if it's not the enemy hole
+            if (i == 6 && getPlayerPlaying() == false) {
+                i++;
+                endIndex++;
+                }
+            else if (i == 13 && getPlayerPlaying() == true) {
+                i++;
+                endIndex++;
+                }
+            else {
+                setStones(i, getStones(i)+1);
+            }
             System.out.println(this.holes);
         }
     }
+
+
 
     public void checkIfHome(int index) {
             if (index == 6 && getPlayerPlaying() == true) {
@@ -105,14 +123,13 @@ public class Board {
         return this.holes.get(index);
     }
 
-    public boolean isAnotherRound() {
-        return anotherRound;
-    }
-
     public void setAnotherRound(boolean anotherRound) {
         this.anotherRound = anotherRound;
     }
 
+   public boolean getAnotherRound() {
+        return anotherRound;
+    }
 
     public boolean getPlayerPlaying() {
         return playerPlaying;
