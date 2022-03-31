@@ -12,13 +12,34 @@ public class SaveHandler implements ISaveHandler {
         
         
         try(Scanner scanner = new Scanner(getFile(filename))) {
-        
+
             String[] saveData = scanner.nextLine().split(";");
-        
-            new Game(saveData[0], saveData[1], Boolean.parseBoolean(saveData[2]), 0);
+            String[] saveDataHoles = scanner.nextLine().replace("[", "").replace("]", "").split(",");
+            
+            game.setPlayer1(saveData[0]);
+            game.setPlayer2(saveData[1]);
+            game.getBoard().setPlayerPlaying(Boolean.parseBoolean(saveData[2]));
+            game.getBoard().setAnotherRound(Boolean.parseBoolean(saveData[3]));
+
+            if (saveData[4].equals("true")) {
+                game.setGameOver(true);
+            }
+
+            for (int i = 0; i < saveDataHoles.length;) {
+                String temp = saveDataHoles[i].strip();
+                int number = Integer.parseInt(temp);
+                game.getBoard().setStones(i, Integer.valueOf(number));
+                i++;
+            }
+
+            game.updateScore();
+
+            System.out.println("Fullført loading");
+            System.out.println(game);
 
         } catch (Exception e) {
                 //TODO: handle exception
+                System.out.println("Feil i scanner" + e);
         }
 
         return null;
@@ -30,11 +51,17 @@ public class SaveHandler implements ISaveHandler {
         
         try(PrintWriter writer = new PrintWriter(getFile(filename))) {
 
-            writer.println(game.getPlayer1() +";"+ game.getPlayer2() +";"+game.getBoard().getPlayerPlaying() +";"+ Boolean.toString(game.getBoard().getAnotherRound()) +";"+ game.getBoard().toString());
+            writer.println(game.getPlayer1() +";"+ game.getPlayer2() +";"+game.getBoard().getPlayerPlaying() +";"+ Boolean.toString(game.getBoard().getAnotherRound()) +";"+ Boolean.toString(game.getGameOver()));
+            writer.println(game.getBoard().toString());
             
         } catch (Exception e) {
             //TODO: handle exception
         }
+        
+    }
+
+    //method for saving completed games
+    public void scoreBoardSave() {
         
     }
 

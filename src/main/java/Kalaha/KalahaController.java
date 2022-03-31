@@ -74,6 +74,12 @@ public class KalahaController {
         try {
             saveHandler.readSave(loadInput.getText(), game);
             System.out.println("vellykket opplastning");
+            // game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue());
+            //update view
+            updateHoles();         
+            updateScore();
+            System.out.println("Riktig innlastning av view");
+
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -101,6 +107,8 @@ public class KalahaController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 
     public void hole0() {
         try {
@@ -266,7 +274,7 @@ public class KalahaController {
 
     // public void sleep() {
     //     try {
-    //         Thread.sleep(100);
+    //         Thread.sleep(1000);
     //     } catch (Exception e) {
     //         e.printStackTrace();
     //     }
@@ -280,7 +288,7 @@ public class KalahaController {
         hole3.setText(String.valueOf(game.getBoard().getStones(3)));
         hole4.setText(String.valueOf(game.getBoard().getStones(4)));
         hole5.setText(String.valueOf(game.getBoard().getStones(5)));
-
+        
         hole7.setText(String.valueOf(game.getBoard().getStones(7)));
         hole8.setText(String.valueOf(game.getBoard().getStones(8)));
         hole9.setText(String.valueOf(game.getBoard().getStones(9)));

@@ -1,5 +1,6 @@
 package Kalaha;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,7 +14,7 @@ public class Board {
     //ToString
     @Override
     public String toString() {
-        return "[" + holes + anotherRound+ "]";
+        return ""+ holes;
     }
     
     // Constructor of a board with 4-6 stones in each hole
@@ -49,7 +50,7 @@ public class Board {
                 checkIfEmpty(i);
                 checkIfHome(i);
             }
-
+            
             System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
@@ -137,6 +138,12 @@ public class Board {
 
     public void setPlayerPlaying(boolean playerPlaying) {
         this.playerPlaying = playerPlaying;
+    }
+
+    //methods for loading
+
+    public void setHoles(Integer[] holes) {
+        this.holes = Arrays.asList(holes);
     }
 
 }

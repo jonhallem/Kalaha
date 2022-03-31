@@ -1,5 +1,6 @@
 package Kalaha;
 
+import java.io.FileNotFoundException;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -13,13 +14,13 @@ public class Game {
     @Override
     public String toString() {
         return "Game [board=" + board + ", player1=" + player1 + ", player1Score=" + player1Score + ", player2="
-                + player2 + ", player2Score=" + player2Score + ", playerPlaying=" + "]";
+                + player2 + ", player2Score=" + player2Score + ", gameover=" + gameOver + "]";
     }
 
 
     //konstruktør av spillere me validering, uten æ,ø,å akkurat nå. evnt gyldig med tall.
     public Game(String player1, String player2, boolean startingPlayer, int holes) {
-        if (!Pattern.matches("[A-Za-z ]*", player1) && !Pattern.matches("[A-Za-z ]*", player1)) {
+        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1) && !Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1)) {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
         }
 
@@ -91,7 +92,7 @@ public class Game {
             int enemyhome = board.getStones(13);
             board.setStones(13, enemyhome+enemyStones);
 
-            setGameOver();
+            setGameOver(true);
             updateScore();
             System.out.println("Game is over.");
         } else if (board.getStones(7) == 0 && board.getStones(8) == 0 && board.getStones(9) == 0 && board.getStones(10) == 0 && board.getStones(11) == 0 && board.getStones(12) == 0) {
@@ -102,7 +103,7 @@ public class Game {
             int enemyhome = board.getStones(6);
             board.setStones(6, enemyhome+enemyStones);
 
-            setGameOver();
+            setGameOver(true);
             updateScore();
             System.out.println("Game is over.");
         }
@@ -140,24 +141,41 @@ public class Game {
         return gameOver;
     }
 
-    public void setGameOver() {
-        this.gameOver = true;
+//må endre til changable
+    public void setGameOver(boolean bool) {
+        this.gameOver = bool;
     }
 
 
+    //loading methods for updating values
 
-    public static void main(String[] args) {
+    public void setPlayer1(String name) {
+        this.player1 = name;
+    }
+
+    public void setPlayer2(String name) {
+        this.player2 = name;
+    }
+
+//fjern filenotfoundexpection
+    public static void main(String[] args) throws FileNotFoundException {
         Game game = new Game("Jon", "Jarl", true, 6);
+        // System.out.println(game);
+        // game.playRound(0);
+        // game.playRound(1);
+        // game.playRound(7);
+        // game.playRound(2);
+        // game.playRound(8);
+        // game.playRound(3);
+        // game.playRound(9);
+        // game.playRound(4);
+        // System.out.println(game);
+    
+        SaveHandler saveHandler = new SaveHandler();
+        saveHandler.readSave("fil", game);
         System.out.println(game);
-        game.playRound(0);
-        game.playRound(1);
-        game.playRound(7);
-        game.playRound(2);
-        game.playRound(8);
-        game.playRound(3);
-        game.playRound(9);
-        game.playRound(4);
-        System.out.println(game);
+
+
     }
 
 }
