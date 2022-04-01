@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class SaveHandler implements ISaveHandler {
 
+
+    //void?
     @Override
     public Game readSave(String filename, Game game) throws FileNotFoundException {
         
@@ -57,11 +59,6 @@ public class SaveHandler implements ISaveHandler {
         } catch (Exception e) {
             //TODO: handle exception
         }
-        
-    }
-
-    //method for saving completed games
-    public void scoreBoardSave() {
         
     }
 

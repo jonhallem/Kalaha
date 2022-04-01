@@ -1,9 +1,7 @@
 package Kalaha;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Board {
     private List<Integer> holes;
@@ -50,7 +48,7 @@ public class Board {
                 checkIfEmpty(i);
                 checkIfHome(i);
             }
-            
+
             System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
@@ -144,6 +142,12 @@ public class Board {
 
     public void setHoles(Integer[] holes) {
         this.holes = Arrays.asList(holes);
+    }
+
+    //temp for scoreboardloading
+
+    public List<Integer> getHoles() {
+        return this.holes;
     }
 
 }

@@ -1,5 +1,6 @@
 package Kalaha;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.regex.Pattern;
 
@@ -18,7 +19,7 @@ public class Game {
     }
 
 
-    //konstruktør av spillere me validering, uten æ,ø,å akkurat nå. evnt gyldig med tall.
+    //constructor with validation of names
     public Game(String player1, String player2, boolean startingPlayer, int holes) {
         if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1) && !Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1)) {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
@@ -95,6 +96,7 @@ public class Game {
             setGameOver(true);
             updateScore();
             System.out.println("Game is over.");
+
         } else if (board.getStones(7) == 0 && board.getStones(8) == 0 && board.getStones(9) == 0 && board.getStones(10) == 0 && board.getStones(11) == 0 && board.getStones(12) == 0) {
             //find all enemy stones
             int enemyStones = board.getStones(0)+board.getStones(1)+board.getStones(2)+board.getStones(3)+board.getStones(4)+board.getStones(5);
@@ -106,7 +108,10 @@ public class Game {
             setGameOver(true);
             updateScore();
             System.out.println("Game is over.");
+
         }
+
+
     }
 
 
@@ -141,7 +146,6 @@ public class Game {
         return gameOver;
     }
 
-//må endre til changable
     public void setGameOver(boolean bool) {
         this.gameOver = bool;
     }
@@ -157,23 +161,22 @@ public class Game {
         this.player2 = name;
     }
 
-//fjern filenotfoundexpection
-    public static void main(String[] args) throws FileNotFoundException {
-        Game game = new Game("Jon", "Jarl", true, 6);
+    public static void main(String[] args) throws FileNotFoundException{
+        Game game = new Game("Jon", "petter", true, 6);
         // System.out.println(game);
-        // game.playRound(0);
-        // game.playRound(1);
-        // game.playRound(7);
-        // game.playRound(2);
-        // game.playRound(8);
+        game.playRound(0);
+        game.playRound(1);
+        game.playRound(7);
+        game.playRound(2);
+        game.playRound(8);
         // game.playRound(3);
         // game.playRound(9);
         // game.playRound(4);
-        // System.out.println(game);
-    
-        SaveHandler saveHandler = new SaveHandler();
-        saveHandler.readSave("fil", game);
         System.out.println(game);
+        Scoreboard scoreboard = new Scoreboard();
+        scoreboard.scoreBoardSave(game);
+
+
 
 
     }
