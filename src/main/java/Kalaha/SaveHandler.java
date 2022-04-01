@@ -25,6 +25,8 @@ public class SaveHandler implements ISaveHandler {
 
             if (saveData[4].equals("true")) {
                 game.setGameOver(true);
+            } else {
+                game.setGameOver(false);
             }
 
             for (int i = 0; i < saveDataHoles.length;) {

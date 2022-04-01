@@ -2,6 +2,7 @@ package Kalaha;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -34,14 +35,21 @@ public class Game {
 
     //main method for running a round
     public void playRound(int index) {
-        
+
         isValidHole(index);
         board.placeStones(index);
 
         updateScore();
-        checkIfGameOver();
+
         changePlayer();
 
+        //!!!!!!! Ok å lage nytt objekt her? eller må jeg bruke konstruktør elns?!!!!!!!!!
+        if (getPlayer2().equals("Robot") && board.getPlayerPlaying() == false) {
+            SimpleAI robot = new SimpleAI();
+            playRound(robot.decidePlay(this));
+        }
+
+        checkIfGameOver();
         }
 
 
@@ -49,17 +57,20 @@ public class Game {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
         // }
+        
         if (board.getAnotherRound() == true) {
             //If anotherRound is set to true, do not change player
             return;
         }
         if (board.getPlayerPlaying() == true) {
             board.setPlayerPlaying(false);
+            
         }
         else {
             board.setPlayerPlaying(true);
         }
     }
+
     
     //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
     //you also can not pick an empty hole
@@ -162,17 +173,17 @@ public class Game {
     }
 
     public static void main(String[] args) throws FileNotFoundException{
-        Game game = new Game("Jon", "petter", true, 6);
+        Game game = new Game("Jon", "Robot", true, 6);
         // System.out.println(game);
         game.playRound(0);
         game.playRound(1);
-        game.playRound(7);
-        game.playRound(2);
-        game.playRound(8);
+        // game.playRound(7);
+        game.playRound(5);
+        // game.playRound(8);
         // game.playRound(3);
         // game.playRound(9);
         // game.playRound(4);
-        System.out.println(game);
+        // System.out.println(game);
         Scoreboard scoreboard = new Scoreboard();
         scoreboard.scoreBoardSave(game);
 

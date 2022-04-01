@@ -22,7 +22,7 @@ public class KalahaController {
     private GridPane background;
 
     @FXML
-    private Label info, stoneLabel, feedBackLabel;
+    private Label info, stoneLabel, feedBackLabel, AILabel, scoreBoardLabel;
 
     @FXML
     private TextField player1Name, player2Name, loadInput;
@@ -68,6 +68,7 @@ public class KalahaController {
         updateHoles();
         player1Name.setVisible(false);
         player2Name.setVisible(false);
+        AILabel.setVisible(false);
         playerStarting.setVisible(false);
         stoneLabel.setVisible(false);
         startingStones.setVisible(false);
@@ -82,6 +83,10 @@ public class KalahaController {
             System.out.println("vellykket opplastning");
             // game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue());
             //update view
+               
+            hole0.setDisable(false); hole1.setDisable(false); hole2.setDisable(false); hole3.setDisable(false); hole4.setDisable(false); hole5.setDisable(false); 
+            hole7.setDisable(false); hole8.setDisable(false); hole9.setDisable(false); hole10.setDisable(false); hole11.setDisable(false); hole12.setDisable(false); 
+            
             updateHoles();         
             updateScore();
             System.out.println("Riktig innlastning av view");
@@ -123,17 +128,23 @@ public class KalahaController {
         // scoreBoard.setHeaderText("Completed games:");
         // scoreBoard.show();
         // scoreBoard.setDialogPane(ListView.);
+        if (scoreBoardList.isVisible() == false) {
+            info.setVisible(false); scoreBoardList.setVisible(true); scoreBoardLabel.setVisible(true);
+            hole0.setVisible(false); hole1.setVisible(false); hole2.setVisible(false); hole3.setVisible(false); hole4.setVisible(false); hole5.setVisible(false); home6.setVisible(false); 
+            hole7.setVisible(false); hole8.setVisible(false); hole9.setVisible(false); hole10.setVisible(false); hole11.setVisible(false); hole12.setVisible(false); home13.setVisible(false);
+            try {
+                scoreBoardList.getItems().setAll(scoreboard.scoreBoardLoad());
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-        try {
-            scoreBoardList.setVisible(true);
-            scoreBoardList.getItems().setAll(scoreboard.scoreBoardLoad());
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } else {
+            info.setVisible(false); scoreBoardList.setVisible(false); scoreBoardLabel.setVisible(false);
+            hole0.setVisible(true); hole1.setVisible(true); hole2.setVisible(true); hole3.setVisible(true); hole4.setVisible(true); hole5.setVisible(true); home6.setVisible(true); 
+            hole7.setVisible(true); hole8.setVisible(true); hole9.setVisible(true); hole10.setVisible(true); hole11.setVisible(true); hole12.setVisible(true); home13.setVisible(true);
+
         }
-
-
-
     }
 
 

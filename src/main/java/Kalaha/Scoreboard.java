@@ -4,10 +4,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,7 +26,9 @@ public class Scoreboard {
         //!!!!!!!!IS this a good method?!!!!!!
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("scoreboard.txt", true))) {
 
-            bw.write(game.getPlayer1() +": "+ game.getPlayer1Score() +" vs. "+ game.getPlayer2() +": "+ game.getPlayer2Score() + "\n");
+            Calendar date = Calendar.getInstance();
+            
+            bw.write( game.getPlayer1() +": "+ game.getPlayer1Score() +" vs. "+ game.getPlayer2() +": "+ game.getPlayer2Score() +" - "+date.getTime() + "\n");
             
         } catch (Exception e) {
             //TODO: handle exception
