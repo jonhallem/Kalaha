@@ -7,18 +7,15 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Scoreboard {
 
-    List<String> scoreBoardList = Arrays.asList("mon", "tue", "wed", "thu", "fri", "sat", "sun");
-
-    
-    public Scoreboard() {
-        this.scoreBoardList = Arrays.asList("mon", "tue", "wed", "thu", "fri", "sat", "sun");
-    }
+    List<String> scoreBoardList;
 
     //method for saving completed games
     public void scoreBoardSave(Game game) throws FileNotFoundException {
@@ -45,6 +42,9 @@ public class Scoreboard {
                 System.out.println(savedata);
                 scoreList.add(savedata);
             }
+
+        //sort by newest entry first
+        Collections.reverse(scoreList);
         
         return scoreList;
 

@@ -5,13 +5,6 @@ import java.util.Random;
 public class SimpleAI {
     private int bestplay;
 
-    private int calculateBestPlay() {
-        Random random = new Random();
-        int index = random.nextInt(6)+7;
-        return index;
-    }
-
-    
     public int decidePlay(Game game) {
 
         System.out.println("Robot is calculating move!");
@@ -32,6 +25,12 @@ public class SimpleAI {
         }
         System.out.println("robot is playing random " + bestplay);
         return bestplay;
+    }
+
+    private int calculateBestPlay() {
+        Random random = new Random();
+        int index = random.nextInt(6)+7;
+        return index;
     }
 
 
