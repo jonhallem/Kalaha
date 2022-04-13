@@ -186,6 +186,8 @@ public class Game {
         // System.out.println(game);
         Scoreboard scoreboard = new Scoreboard();
         scoreboard.scoreBoardSave(game);
+        scoreboard.scoreBoardLoad();
+        scoreboard.getScoreBoardListString();
 
 
 

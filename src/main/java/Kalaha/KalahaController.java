@@ -1,6 +1,7 @@
 package Kalaha;
 
 import java.io.FileNotFoundException;
+import java.util.Collections;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,7 +23,7 @@ public class KalahaController {
     private GridPane background;
 
     @FXML
-    private Label info, stoneLabel, feedBackLabel, AILabel, scoreBoardLabel;
+    private Label info, stoneLabel, feedBackLabel, AILabel, scoreBoardLabel, sortLabel;
 
     @FXML
     private TextField player1Name, player2Name, loadInput;
@@ -38,7 +39,7 @@ public class KalahaController {
     // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
 
     @FXML
-    private Button scoreBoardButton, startGame, loadButton, saveButton;
+    private Button scoreBoardButton, sortPlayer1, sortTime, startGame, loadButton, saveButton;
 
     @FXML
     private Button home6, home13;
@@ -129,22 +130,45 @@ public class KalahaController {
         // scoreBoard.show();
         // scoreBoard.setDialogPane(ListView.);
         if (scoreBoardList.isVisible() == false) {
-            info.setVisible(false); scoreBoardList.setVisible(true); scoreBoardLabel.setVisible(true);
+            info.setVisible(false); scoreBoardList.setVisible(true); scoreBoardLabel.setVisible(true); sortLabel.setVisible(true); sortPlayer1.setVisible(true); sortTime.setVisible(true);
             hole0.setVisible(false); hole1.setVisible(false); hole2.setVisible(false); hole3.setVisible(false); hole4.setVisible(false); hole5.setVisible(false); home6.setVisible(false); 
             hole7.setVisible(false); hole8.setVisible(false); hole9.setVisible(false); hole10.setVisible(false); hole11.setVisible(false); hole12.setVisible(false); home13.setVisible(false);
             try {
-                scoreBoardList.getItems().setAll(scoreboard.scoreBoardLoad());
+                scoreboard.scoreBoardLoad();
+                scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
         } else {
-            info.setVisible(false); scoreBoardList.setVisible(false); scoreBoardLabel.setVisible(false);
+            info.setVisible(false); scoreBoardList.setVisible(false); scoreBoardLabel.setVisible(false); sortLabel.setVisible(false); sortPlayer1.setVisible(false); sortTime.setVisible(false);
             hole0.setVisible(true); hole1.setVisible(true); hole2.setVisible(true); hole3.setVisible(true); hole4.setVisible(true); hole5.setVisible(true); home6.setVisible(true); 
             hole7.setVisible(true); hole8.setVisible(true); hole9.setVisible(true); hole10.setVisible(true); hole11.setVisible(true); hole12.setVisible(true); home13.setVisible(true);
 
         }
+    }
+
+    public void sortByPlayer1() {
+
+        scoreboard.sortScoreBoardByPlayer1();
+
+        scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
+
+        System.out.println("sortert!");
+
+
+    }
+
+    public void sortByTime() {
+
+        scoreboard.sortScoreBoardByTime();
+
+        scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
+
+        System.out.println("sortert!");
+
+
     }
 
 
