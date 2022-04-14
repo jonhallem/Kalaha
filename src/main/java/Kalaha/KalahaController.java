@@ -29,7 +29,7 @@ public class KalahaController {
     private TextField player1Name, player2Name, loadInput;
 
     @FXML
-    private CheckBox playerStarting;
+    private CheckBox playerStarting, versusAI;
 
     @FXML
     private ListView<String> scoreBoardList;

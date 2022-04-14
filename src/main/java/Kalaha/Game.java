@@ -44,9 +44,14 @@ public class Game {
         changePlayer();
 
         //!!!!!!! Ok å lage nytt objekt her? eller må jeg bruke konstruktør elns?!!!!!!!!!
-        if (getPlayer2().equals("Robot") && board.getPlayerPlaying() == false) {
-            SimpleAI robot = new SimpleAI();
-            playRound(robot.decidePlay(this));
+        if (getPlayer2().equals("ERobot") && board.getPlayerPlaying() == false) {
+            EasyAI robot = new EasyAI();
+            playRound(robot.decideBestPlay(this));
+        }
+
+        if (getPlayer2().equals("MRobot") && board.getPlayerPlaying() == false) {
+            MediumAI robot = new MediumAI();
+            playRound(robot.decideBestPlay(this));
         }
 
         checkIfGameOver();
