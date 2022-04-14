@@ -49,7 +49,7 @@ public class Board {
                 checkIfHome(i);
             }
 
-            System.out.println("dette er hull " + i);
+            // System.out.println("dette er hull " + i);
 
             //for each iteration update hole with 1 more stone
             //but only if it's not the enemy hole
@@ -64,8 +64,8 @@ public class Board {
             else {
                 setStones(i, getStones(i)+1);
             }
-            System.out.println(this.holes);
         }
+        System.out.println(this.holes);
     }
 
 

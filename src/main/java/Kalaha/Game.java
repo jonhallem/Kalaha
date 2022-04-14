@@ -180,14 +180,14 @@ public class Game {
         // game.playRound(7);
         game.playRound(5);
         // game.playRound(8);
-        // game.playRound(3);
+        game.playRound(3);
         // game.playRound(9);
-        // game.playRound(4);
+        game.playRound(1);
         // System.out.println(game);
-        Scoreboard scoreboard = new Scoreboard();
-        scoreboard.scoreBoardSave(game);
-        scoreboard.scoreBoardLoad();
-        scoreboard.getScoreBoardListString();
+        // Scoreboard scoreboard = new Scoreboard();
+        // scoreboard.scoreBoardSave(game);
+        // scoreboard.scoreBoardLoad();
+        // scoreboard.getScoreBoardListString();
 
 
 
