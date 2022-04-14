@@ -23,13 +23,13 @@ public class KalahaController {
     private GridPane background;
 
     @FXML
-    private Label info, stoneLabel, feedBackLabel, AILabel, scoreBoardLabel, sortLabel;
+    private Label info, stoneLabel, feedBackLabel, labelAI, scoreBoardLabel, sortLabel;
 
     @FXML
     private TextField player1Name, player2Name, loadInput;
 
     @FXML
-    private CheckBox playerStarting, versusAI;
+    private CheckBox playerStarting;
 
     @FXML
     private ListView<String> scoreBoardList;
@@ -37,6 +37,9 @@ public class KalahaController {
     @FXML
     private ComboBox<Integer> startingStones;
     // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
+
+    @FXML
+    private ComboBox<String> versusAI;
 
     @FXML
     private Button scoreBoardButton, sortPlayer1, sortTime, startGame, loadButton, saveButton;
@@ -51,11 +54,14 @@ public class KalahaController {
 
         startingStones.getItems().addAll(4,5,6);
         startingStones.getSelectionModel().select(2);
+
+        versusAI.getItems().addAll("Human","Easy", "Medium");
+        versusAI.getSelectionModel().select(0);
     }
 
     public void startGame() {
         try {
-            game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue());
+            game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue(), versusAI.getValue());
             scoreboard = new Scoreboard();
         } catch (Exception e) {
             feedBackLabel.setText("Name can only contain letters and spaces!");
@@ -69,7 +75,8 @@ public class KalahaController {
         updateHoles();
         player1Name.setVisible(false);
         player2Name.setVisible(false);
-        AILabel.setVisible(false);
+        labelAI.setVisible(false);
+        versusAI.setVisible(false);
         playerStarting.setVisible(false);
         stoneLabel.setVisible(false);
         startingStones.setVisible(false);

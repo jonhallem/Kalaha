@@ -9,6 +9,7 @@ public class Game {
     private boolean gameOver;
     private String player1;
     private String player2;
+    private char versusAI;
     private int player1Score = 0;
     private int player2Score = 0;
     private Board board;
@@ -21,14 +22,24 @@ public class Game {
 
 
     //constructor with validation of names
-    public Game(String player1, String player2, boolean startingPlayer, int holes) {
+    public Game(String player1, String player2, boolean startingPlayer, int holes, String versusAI) {
         if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1) && !Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1)) {
             throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
         }
 
         this.gameOver = false;
         this.player1 = player1;
-        this.player2 = player2;
+
+        if (versusAI.equals("Easy")) {
+            this.versusAI = 'E';
+            this.player2 = "EasyRobot";
+        } else if (versusAI.equals("Medium")) {
+            this.versusAI = 'M';
+            this.player2 = "MediumRobot";
+        } else {
+            this.player2 = player2;
+        }
+
         this.board = new Board(holes, startingPlayer);
         
     }
@@ -44,12 +55,12 @@ public class Game {
         changePlayer();
 
         //!!!!!!! Ok å lage nytt objekt her? eller må jeg bruke konstruktør elns?!!!!!!!!!
-        if (getPlayer2().equals("ERobot") && board.getPlayerPlaying() == false) {
+        if (getVersusAI() == 'E' && board.getPlayerPlaying() == false) {
             EasyAI robot = new EasyAI();
             playRound(robot.decideBestPlay(this));
         }
 
-        if (getPlayer2().equals("MRobot") && board.getPlayerPlaying() == false) {
+        if (getVersusAI() == 'M' && board.getPlayerPlaying() == false) {
             MediumAI robot = new MediumAI();
             playRound(robot.decideBestPlay(this));
         }
@@ -157,6 +168,10 @@ public class Game {
     public Board getBoard() {
         return board;
     }
+    
+    private char getVersusAI() {
+        return versusAI;
+    }
 
     public boolean getGameOver() {
         return gameOver;
@@ -165,6 +180,8 @@ public class Game {
     public void setGameOver(boolean bool) {
         this.gameOver = bool;
     }
+
+
 
 
     //loading methods for updating values
