@@ -115,10 +115,10 @@ public class Game {
         if (board.getStones(0) == 0 && board.getStones(1) == 0 && board.getStones(2) == 0 && board.getStones(3) == 0 && board.getStones(4) == 0 && board.getStones(5) == 0) {
             //find all enemy stones
             int enemyStones = board.getStones(7)+board.getStones(8)+board.getStones(9)+board.getStones(10)+board.getStones(11)+board.getStones(12);
-            //remove all enemy stones and add them to their home
+            //remove all enemy stones and add them to your home
             board.setStones(7, 0); board.setStones(8, 0); board.setStones(9, 0); board.setStones(10, 0); board.setStones(11, 0); board.setStones(12, 0);
-            int enemyhome = board.getStones(13);
-            board.setStones(13, enemyhome+enemyStones);
+            int enemyhome = board.getStones(6);
+            board.setStones(6, enemyhome+enemyStones);
 
             setGameOver(true);
             updateScore();
@@ -127,10 +127,10 @@ public class Game {
         } else if (board.getStones(7) == 0 && board.getStones(8) == 0 && board.getStones(9) == 0 && board.getStones(10) == 0 && board.getStones(11) == 0 && board.getStones(12) == 0) {
             //find all enemy stones
             int enemyStones = board.getStones(0)+board.getStones(1)+board.getStones(2)+board.getStones(3)+board.getStones(4)+board.getStones(5);
-            //remove all enemy stones and add them to their home
+            //remove all enemy stones and add them to your home
             board.setStones(0, 0); board.setStones(1, 0); board.setStones(2, 0); board.setStones(3, 0); board.setStones(4, 0); board.setStones(5, 0);
-            int enemyhome = board.getStones(6);
-            board.setStones(6, enemyhome+enemyStones);
+            int enemyhome = board.getStones(13);
+            board.setStones(13, enemyhome+enemyStones);
 
             setGameOver(true);
             updateScore();
@@ -195,16 +195,18 @@ public class Game {
     }
 
     public static void main(String[] args) throws FileNotFoundException{
-        Game game = new Game("Jon", "Robot", true, 6);
-        // System.out.println(game);
-        game.playRound(0);
-        game.playRound(1);
-        // game.playRound(7);
-        game.playRound(5);
-        // game.playRound(8);
-        game.playRound(3);
-        // game.playRound(9);
-        game.playRound(1);
+        Game game = new Game("Jon", "Hedda", false, 6, "Human");
+        Integer[] testHoles =  {1, 0, 4, 3, 1, 7, 7, 0, 7, 2, 18, 1, 9, 7};
+        game.getBoard().setHoles(testHoles);
+        System.out.println(game);
+        game.playRound(10);
+        // game.playRound(1);
+        // // game.playRound(7);
+        // game.playRound(5);
+        // // game.playRound(8);
+        // game.playRound(3);
+        // // game.playRound(9);
+        // game.playRound(1);
         // System.out.println(game);
         // Scoreboard scoreboard = new Scoreboard();
         // scoreboard.scoreBoardSave(game);

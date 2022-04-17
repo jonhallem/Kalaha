@@ -16,18 +16,12 @@ public class Board {
     }
     
     // Constructor of a board with 4-6 stones in each hole
-    public Board(int stones, boolean startingPlayer) {
-        //The most normal starting game options.
-        //Can shorten this to any stone 
-        if (stones == 6) {
-            this.holes = Arrays.asList(6,6,6,6,6,6, 0 , 6,6,6,6,6,6, 0 );
-        } else if (stones == 5) {
-            this.holes = Arrays.asList(5,5,5,5,5,5, 0 , 5,5,5,5,5,5, 0 );
-        } else if (stones == 4) {
-            this.holes = Arrays.asList(4,4,4,4,4,4, 0 , 4,4,4,4,4,4, 0 );
-        } else {
-            throw new IllegalArgumentException("There can only be between 4-6 stones in each hole");
-        }
+    public Board(int s, boolean startingPlayer) {
+        //The most normal starting game options 4, 5 and 6 are restricted by the controller.
+        //But in theory any number of stones can be used
+
+        this.holes = Arrays.asList(s,s,s,s,s,s, 0 , s,s,s,s,s,s, 0 );
+
         this.anotherRound = false;
 
         //Option to change who is the starting player
@@ -49,23 +43,22 @@ public class Board {
                 checkIfHome(i);
             }
 
-            // System.out.println("dette er hull " + i);
+            System.out.println("dette er index " + i + " av " + endIndex);
+            System.out.println(this.holes);
 
             //for each iteration update hole with 1 more stone
             //but only if it's not the enemy hole
             if (i == 6 && getPlayerPlaying() == false) {
-                i++;
                 endIndex++;
                 }
             else if (i == 13 && getPlayerPlaying() == true) {
-                i++;
                 endIndex++;
                 }
             else {
                 setStones(i, getStones(i)+1);
             }
+            System.out.println(this.holes);
         }
-        System.out.println(this.holes);
     }
 
 
@@ -85,7 +78,8 @@ public class Board {
     
 
     public void checkIfEmpty(int index) {
-        if (getStones(index) == 0) {
+        //the following if-check sees if the hole is empty (the latter check is only for testing purposes)
+        if (getStones(index) == 0 && index != 6 && index != 13) {
 
             if (index == 0 || index == 1 || index == 2 || index == 3 || index == 4 || index == 5) {
                 if (getPlayerPlaying() != true) {
@@ -140,6 +134,8 @@ public class Board {
 
     //methods for loading
 
+    //are these in use?
+
     public void setHoles(Integer[] holes) {
         this.holes = Arrays.asList(holes);
     }
@@ -150,4 +146,12 @@ public class Board {
         return this.holes;
     }
 
+
+
+    public static void main(String[] args) {
+        Board board = new Board(6, true);
+        Integer[] testHoles =  {1, 0, 4, 3, 1, 7, 7, 0, 7, 2, 18, 1, 9, 7};
+        board.setHoles(testHoles);
+        board.placeStones(10);
+    }
 }
