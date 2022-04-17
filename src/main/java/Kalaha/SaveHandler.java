@@ -22,6 +22,7 @@ public class SaveHandler implements ISaveHandler {
             game.setPlayer2(saveData[1]);
             game.getBoard().setPlayerPlaying(Boolean.parseBoolean(saveData[2]));
             game.getBoard().setAnotherRound(Boolean.parseBoolean(saveData[3]));
+            game.setVersusAI(saveData[5].charAt(0));
 
             if (saveData[4].equals("true")) {
                 game.setGameOver(true);
@@ -55,7 +56,7 @@ public class SaveHandler implements ISaveHandler {
         
         try(PrintWriter writer = new PrintWriter(getFile(filename))) {
 
-            writer.println(game.getPlayer1() +";"+ game.getPlayer2() +";"+game.getBoard().getPlayerPlaying() +";"+ Boolean.toString(game.getBoard().getAnotherRound()) +";"+ Boolean.toString(game.getGameOver()));
+            writer.println(game.getPlayer1() +";"+ game.getPlayer2() +";"+game.getBoard().getPlayerPlaying() +";"+ Boolean.toString(game.getBoard().getAnotherRound()) +";"+ Boolean.toString(game.getGameOver()) + ";" + game.getVersusAI());
             writer.println(game.getBoard().toString());
             
         } catch (Exception e) {

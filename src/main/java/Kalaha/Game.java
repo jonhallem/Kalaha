@@ -169,8 +169,12 @@ public class Game {
         return board;
     }
     
-    private char getVersusAI() {
+    public char getVersusAI() {
         return versusAI;
+    }
+
+    public void setVersusAI(char AI) {
+        this.versusAI = AI;
     }
 
     public boolean getGameOver() {
