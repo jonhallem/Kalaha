@@ -23,13 +23,15 @@ public class Game {
 
     //constructor with validation of names
     public Game(String player1, String player2, boolean startingPlayer, int holes, String versusAI) {
-        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1) && !Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1)) {
-            throw new IllegalArgumentException("Navnet kan bare bestå av bokstaver og opprom!");
+        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1) || !Pattern.matches("[A-ZÆØÅa-zæøå ]*", player2)) {
+            throw new IllegalArgumentException("Name can only consist of letters and spaces!");
         }
 
         this.gameOver = false;
         this.player1 = player1;
 
+        //takes input from controller and converts it into char for playRound logic.
+        //Also sets name to robot for easier scoreboard translation
         if (versusAI.equals("Easy")) {
             this.versusAI = 'E';
             this.player2 = "EasyRobot";
@@ -37,12 +39,16 @@ public class Game {
             this.versusAI = 'M';
             this.player2 = "MediumRobot";
         } else {
+            this.versusAI = 'H';
             this.player2 = player2;
         }
 
         this.board = new Board(holes, startingPlayer);
         
     }
+
+    //!!!!!!!!!! her har jeg samlemetoder som kaller på andre metoder (i teorien hjelpemetoder), er det da smartere å holde hjelpemetodene
+    // private i stedet for å teste de hver for seg selv i testingen? !!!!!!!!!!
 
     //main method for running a round
     public void playRound(int index) {
@@ -54,7 +60,8 @@ public class Game {
 
         changePlayer();
 
-        //!!!!!!! Ok å lage nytt objekt her? eller må jeg bruke konstruktør elns?!!!!!!!!!
+        //!!!!!!! Ok å lage nytt objekt her? eller må jeg bruke konstruktør elns? Her lager jeg et nytt objekt (?) hver gang,
+        // er det smartere å gjøre det i konstruktøren? !!!!!!!!!
         if (getVersusAI() == 'E' && board.getPlayerPlaying() == false) {
             EasyAI robot = new EasyAI();
             playRound(robot.decideBestPlay(this));

@@ -7,11 +7,8 @@ import java.util.Scanner;
 
 public class SaveHandler implements ISaveHandler {
 
-
-    //void?
     @Override
-    public Game readSave(String filename, Game game) throws FileNotFoundException {
-        
+    public void readSave(String filename, Game game) throws FileNotFoundException {
         
         try(Scanner scanner = new Scanner(getFile(filename))) {
 
@@ -46,11 +43,9 @@ public class SaveHandler implements ISaveHandler {
                 //TODO: handle exception
                 System.out.println("Feil i scanner" + e);
         }
-
-        return null;
-
     }
 
+    //Saves are stored in the default project folder, for easier access by the examinator
     @Override
     public void writeSave(String filename, Game game) throws FileNotFoundException {
         

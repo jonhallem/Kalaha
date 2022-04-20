@@ -1,17 +1,15 @@
 package Kalaha;
 
 import java.io.FileNotFoundException;
-import java.util.Collections;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 
 public class KalahaController {
@@ -29,14 +27,17 @@ public class KalahaController {
     private TextField player1Name, player2Name, loadInput;
 
     @FXML
+    private TextArea playRules;
+
+    @FXML
     private CheckBox playerStarting;
 
     @FXML
     private ListView<String> scoreBoardList;
 
+    // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
     @FXML
     private ComboBox<Integer> startingStones;
-    // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
 
     @FXML
     private ComboBox<String> versusAI;
@@ -50,7 +51,8 @@ public class KalahaController {
     @FXML
     private Button hole0, hole1, hole2, hole3, hole4, hole5, hole7, hole8, hole9, hole10, hole11, hole12;
 
-    public void initialize() {
+    @FXML
+    private void initialize() {
 
         startingStones.getItems().addAll(4,5,6);
         startingStones.getSelectionModel().select(2);
@@ -59,7 +61,8 @@ public class KalahaController {
         versusAI.getSelectionModel().select(0);
     }
 
-    public void startGame() {
+    @FXML
+    private void startGame() {
         try {
             game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue(), versusAI.getValue());
             scoreboard = new Scoreboard();
@@ -83,8 +86,8 @@ public class KalahaController {
         startGame.setVisible(false);
     } 
 
-
-    public void loadGame() {
+    @FXML
+    private void loadGame() {
         SaveHandler saveHandler = new SaveHandler();
         try {
             saveHandler.readSave(loadInput.getText(), game);
@@ -106,7 +109,8 @@ public class KalahaController {
         }
     }
 
-    public void saveGame() {
+    @FXML
+    private void saveGame() {
         SaveHandler saveHandler = new SaveHandler();
         try {
             saveHandler.writeSave(loadInput.getText(), game);
@@ -118,24 +122,17 @@ public class KalahaController {
         }
     }
 
-    private void showErrorMessage(String message) {
-// er invocationTargetException
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Unvalid hole");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+//     private void showErrorMessage(String message) {
+// // er invocationTargetException
+//         Alert alert = new Alert(AlertType.ERROR);
+//         alert.setTitle("Error");
+//         alert.setHeaderText("Unvalid hole");
+//         alert.setContentText(message);
+//         alert.showAndWait();
+//     }
 
-    public void showScoreBoard() {
-        // Alert scoreBoard = new Alert(AlertType.INFORMATION);
-        // ListView<String> scoreList = new ListView<String>();
-        // scoreBoard.
-        // scoreList.getItems();
-        // scoreBoard.setTitle("Scoreboard");
-        // scoreBoard.setHeaderText("Completed games:");
-        // scoreBoard.show();
-        // scoreBoard.setDialogPane(ListView.);
+    @FXML
+    private void showScoreBoard() {
         if (scoreBoardList.isVisible() == false) {
             info.setVisible(false); scoreBoardList.setVisible(true); scoreBoardLabel.setVisible(true); sortLabel.setVisible(true); sortPlayer1.setVisible(true); sortTime.setVisible(true);
             hole0.setVisible(false); hole1.setVisible(false); hole2.setVisible(false); hole3.setVisible(false); hole4.setVisible(false); hole5.setVisible(false); home6.setVisible(false); 
@@ -156,7 +153,8 @@ public class KalahaController {
         }
     }
 
-    public void sortByPlayer1() {
+    @FXML
+    private void sortByPlayer1() {
 
         scoreboard.sortScoreBoardByPlayer1();
 
@@ -167,7 +165,8 @@ public class KalahaController {
 
     }
 
-    public void sortByTime() {
+    @FXML
+    private void sortByTime() {
 
         scoreboard.sortScoreBoardByTime();
 
@@ -178,141 +177,165 @@ public class KalahaController {
 
     }
 
+    @FXML
+    private void showPlayRules() {
+        if (playRules.isVisible() == false) {
+            playRules.setVisible(true);
+            hole0.setVisible(false); hole1.setVisible(false); hole2.setVisible(false); hole3.setVisible(false); hole4.setVisible(false); hole5.setVisible(false); home6.setVisible(false); 
+            hole7.setVisible(false); hole8.setVisible(false); hole9.setVisible(false); hole10.setVisible(false); hole11.setVisible(false); hole12.setVisible(false); home13.setVisible(false);
+
+        } else {
+            playRules.setVisible(false);
+            hole0.setVisible(true); hole1.setVisible(true); hole2.setVisible(true); hole3.setVisible(true); hole4.setVisible(true); hole5.setVisible(true); home6.setVisible(true); 
+            hole7.setVisible(true); hole8.setVisible(true); hole9.setVisible(true); hole10.setVisible(true); hole11.setVisible(true); hole12.setVisible(true); home13.setVisible(true);
+        }
+    }
 
 
-    public void hole0() {
+
+    @FXML
+    private void hole0() {
         try {
         game.playRound(0);
         updateScore();
         updateHoles();
         } catch (Exception e) {
             feedBackLabel.setText(e.getMessage());
-            showErrorMessage(e.getMessage());
            }
      }
 
-    public void hole1() {
+    @FXML
+    private void hole1() {
         try {
         game.playRound(1);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole2() {
+    @FXML
+    private void hole2() {
         try {
         game.playRound(2);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole3() {
+    @FXML
+    private void hole3() {
         try {
         game.playRound(3);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole4() {
+    @FXML
+    private void hole4() {
         try {
         game.playRound(4);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole5() {
+    @FXML
+    private void hole5() {
         try {
         game.playRound(5);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-
-    public void hole7() {
+    @FXML
+    private void hole7() {
         try {
         game.playRound(7);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole8() {
+    @FXML
+    private void hole8() {
         try {
         game.playRound(8);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole9() {
+    @FXML
+    private void hole9() {
         try {
         game.playRound(9);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-           }
+            feedBackLabel.setText(e.getMessage());
+                   }
      }
 
-    public void hole10() {
+    @FXML
+    private void hole10() {
     try {
         game.playRound(10);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-            }
+            feedBackLabel.setText(e.getMessage());
+                    }
 
     }
 
-    public void hole11() {
+    @FXML
+    private void hole11() {
     try {
         game.playRound(11);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-            }
+            feedBackLabel.setText(e.getMessage());
+                    }
 
     }
 
-    public void hole12() { 
+    @FXML
+    private void hole12() { 
     try {
         game.playRound(12);
         updateScore();
         updateHoles();
         } catch (Exception e) {
-            feedBackLabel.setText("You can not pick empty holes or your opponents hole!");
-            }
+            feedBackLabel.setText(e.getMessage());
+                    }
 
     }
 
-    public void updateScore() {
+    private void updateScore() {
         home6.setText(game.getPlayer1Score());
         home13.setText(game.getPlayer2Score());
         showPlaying();
         handleGameOver(); 
     }
 
-    public void showPlaying() {
+    private void showPlaying() {
         if (game.getBoard().getPlayerPlaying() == true) {
             info.setText("It is " + game.getPlayer1() + "'s turn!");
             info.setStyle("-fx-background-color: green;");
@@ -322,7 +345,7 @@ public class KalahaController {
         }
     }
 
-    public void handleGameOver() {
+    private void handleGameOver() {
         if (game.getGameOver() == true) {
             //disable buttons if game is over
             hole0.setDisable(true); hole1.setDisable(true); hole2.setDisable(true); hole3.setDisable(true); hole4.setDisable(true); hole5.setDisable(true); 
@@ -360,7 +383,7 @@ public class KalahaController {
         
     }
 
-    // public void sleep() {
+    // private void sleep() {
     //     try {
     //         Thread.sleep(1000);
     //     } catch (Exception e) {
@@ -368,7 +391,7 @@ public class KalahaController {
     //     }
     // }
 
-    public void updateHoles() {
+    private void updateHoles() {
         feedBackLabel.setText("");
         hole0.setText(String.valueOf(game.getBoard().getStones(0)));
         hole1.setText(String.valueOf(game.getBoard().getStones(1)));

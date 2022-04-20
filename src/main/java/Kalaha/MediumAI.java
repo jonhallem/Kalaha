@@ -20,14 +20,15 @@ public class MediumAI extends EasyAI {
     }
 
 
-
-    private void calculateEmptyPlay(Game game) {
-        for (int j = 9; j < 13; j++) { //j er 12
+    //!!!!!!!! could be private but test class can't access it.
+    protected void calculateEmptyPlay(Game game) {
+        //checks if a hole is empty
+        for (int j = 8; j < 13; j++) {
             if (game.getBoard().getStones(j) == 0) {
                 System.out.println("Robot found " + j + " to be empty");
-                //ut i fra j sjekk om hull før er j+1
-                for (int i = 1; i < 7; i++) { //i er 1
-                    if ((game.getBoard().getStones(j-i) == i) && (j-i > 6)) { //j-i er da 11
+                //and if a hole is empty, if there is a valid play that lands in it
+                for (int i = 1; i < 7; i++) {
+                    if ((game.getBoard().getStones(j-i) == i) && (j-i > 6)) { 
                         System.out.println("and robot found " + i +  " steps before, and therefore plays " + (j-i));
                         this.bestplay = j-i;
                     }

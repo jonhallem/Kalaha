@@ -18,6 +18,7 @@ public class Scoreboard {
     List<List<String>> scoreBoardList;
 
     //method for saving completed games
+    //the scoreboard file is stored in the default project folder, for easier access by the examinator
     public void scoreBoardSave(Game game) throws FileNotFoundException {
 
         //!!!!!!!!IS this a good method?!!!!!!
@@ -61,10 +62,6 @@ public class Scoreboard {
 
     //getter for scoreBoardList
     public List<String> getScoreBoardListString() {
-        // if (scoreBoardList.isEmpty() || scoreBoardList.equals(null)) {
-        //     return 
-        // }
-
 
         //gets the scoreboard and converts it into a string for the listview in the controller
         List<String> scoreBoardString = new ArrayList<String>();
@@ -78,7 +75,7 @@ public class Scoreboard {
 
 
 
-    // https://stackoverflow.com/questions/35761864/java-sort-list-of-lists
+    //Source: https://stackoverflow.com/questions/35761864/java-sort-list-of-lists
     public void sortScoreBoardByPlayer1() {
         Collections.sort(scoreBoardList, new SortScoreBoardByName<>());
     }

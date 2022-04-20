@@ -5,6 +5,7 @@ import java.util.Random;
 public class EasyAI {
     protected int bestplay;
 
+
     public int decideBestPlay(Game game) {
 
         System.out.println("Robot is calculating move!");
@@ -38,6 +39,16 @@ public class EasyAI {
             }
         } 
         
+    }
+
+    //methods for testing
+
+    protected int getBestPlay() {
+        return bestplay;
+    }
+
+    protected void setBestPlay(int bestPlay) {
+        this.bestplay = bestPlay;
     }
     
     
