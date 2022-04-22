@@ -36,10 +36,6 @@ public class SaveHandlerTest {
         [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]""";;
 
 
-
-
-
-
     @BeforeAll
     public void setUp() throws IOException {
         System.out.println("Initialiserer...");
@@ -48,8 +44,6 @@ public class SaveHandlerTest {
 
         Files.write(savehandler.getSavePath("testSave"), testSaveFileContent.getBytes());
         Files.write(savehandler.getSavePath("testInvalidSave"), testInvalidSaveFileContent.getBytes());
-
-
 
     }
 
