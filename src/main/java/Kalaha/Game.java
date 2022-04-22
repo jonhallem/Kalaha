@@ -22,10 +22,10 @@ public class Game {
 
 
     //constructor with validation of names
+    //the number of player-decided input variables are restricted by ComboBoxes in the controller, therefore validation of parameters are kept to names (and files in saveHandler)
     public Game(String player1, String player2, boolean startingPlayer, int holes, String versusAI) {
-        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player1) || !Pattern.matches("[A-ZÆØÅa-zæøå ]*", player2)) {
-            throw new IllegalArgumentException("Name can only consist of letters and spaces!");
-        }
+        validateName(player1);
+        validateName(player2);
 
         this.gameOver = false;
         this.player1 = player1;
@@ -45,6 +45,13 @@ public class Game {
 
         this.board = new Board(holes, startingPlayer);
         
+    }
+
+    //not tested yet
+    private void validateName(String player) {
+        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player)) {
+            throw new IllegalArgumentException("Name can only consist of letters and spaces!");
+        }
     }
 
     //!!!!!!!!!! her har jeg samlemetoder som kaller på andre metoder (i teorien hjelpemetoder), er det da smartere å holde hjelpemetodene
@@ -198,10 +205,12 @@ public class Game {
     //loading methods for updating values
 
     public void setPlayer1(String name) {
+        validateName(name);
         this.player1 = name;
     }
 
     public void setPlayer2(String name) {
+        validateName(name);
         this.player2 = name;
     }
 

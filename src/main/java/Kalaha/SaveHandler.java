@@ -3,6 +3,7 @@ package Kalaha;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class SaveHandler implements ISaveHandler {
@@ -39,9 +40,6 @@ public class SaveHandler implements ISaveHandler {
             System.out.println("Fullført loading");
             System.out.println(game);
 
-        } catch (Exception e) {
-                //TODO: handle exception
-                System.out.println("Feil i scanner" + e);
         }
     }
 
@@ -61,9 +59,17 @@ public class SaveHandler implements ISaveHandler {
     }
 
 
-    private static File getFile(String filename) {
-        return new File(filename + ".txt");
+    public static File getFile(String filename) {
+    return new File(SaveHandler.class.getResource("Saves/").getFile() + filename + ".txt");
     }
+
+
+    //method for finding correct path during testing
+    public Path getSavePath(String filename) {
+        return Path.of(SaveHandler.class.getResource("Saves/").getFile() + filename + ".txt");
+    }
+
+    
     
     
 

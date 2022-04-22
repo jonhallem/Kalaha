@@ -21,7 +21,6 @@ public class Scoreboard {
     //the scoreboard file is stored in the default project folder, for easier access by the examinator
     public void scoreBoardSave(Game game) throws FileNotFoundException {
 
-        //!!!!!!!!IS this a good method?!!!!!!
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("scoreboard.txt", true))) {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");

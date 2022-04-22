@@ -101,9 +101,11 @@ public class KalahaController {
             updateHoles();         
             updateScore();
             System.out.println("Riktig innlastning av view");
+            feedBackLabel.setText("Loaded!");
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
+            feedBackLabel.setText("No such file!");
             e.printStackTrace();
             System.out.println("feil i opplastning");
         }
@@ -115,8 +117,10 @@ public class KalahaController {
         try {
             saveHandler.writeSave(loadInput.getText(), game);
             System.out.println("vellykket lagring");
+            feedBackLabel.setText("Saved!");
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
+            feedBackLabel.setText("Error during saving");
             e.printStackTrace();
             System.out.println("feil i lagring");
         }

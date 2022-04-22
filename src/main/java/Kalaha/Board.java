@@ -62,7 +62,7 @@ public class Board {
     }
 
 
-    //!!!!could be private, but for tests to work it must be public
+    //!!!!kan være privat, men må være public for at testen skal fungere???
     public void checkIfHome(int index) {
             if (index == 6 && getPlayerPlaying() == true) {
                 // if last stone placed in player 1 home, player 1 gets another round
