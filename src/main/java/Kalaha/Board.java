@@ -18,7 +18,7 @@ public class Board {
     // Constructor of a board with 4-6 stones in each hole
     public Board(int s, boolean startingPlayer) {
         //The most normal starting game options 4, 5 and 6 are restricted by the controller.
-        //But in theory any number of stones can be used
+        //But in theory any number of stones can be used, which is helpful in testing
 
         this.holes = Arrays.asList(s,s,s,s,s,s, 0 , s,s,s,s,s,s, 0 );
 
@@ -63,7 +63,7 @@ public class Board {
 
 
     //!!!!kan være privat, men må være public for at testen skal fungere???
-    public void checkIfHome(int index) {
+    private void checkIfHome(int index) {
             if (index == 6 && getPlayerPlaying() == true) {
                 // if last stone placed in player 1 home, player 1 gets another round
                 this.setAnotherRound(true);
@@ -78,7 +78,7 @@ public class Board {
     
 
     //private
-    public void checkIfEmpty(int index) {
+    private void checkIfEmpty(int index) {
         //the following if-check sees if the hole is empty (the latter check is only for testing purposes)
         if (getStones(index) == 0 && index != 6 && index != 13) {
 

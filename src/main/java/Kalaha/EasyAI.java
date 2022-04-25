@@ -42,7 +42,6 @@ public class EasyAI {
     }
 
     //methods for testing
-
     protected int getBestPlay() {
         return bestplay;
     }

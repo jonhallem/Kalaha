@@ -35,14 +35,24 @@ public class GameTest {
     }
 
     @Test
-    public void testConstructorWithNumbersInName() {
+    public void testNameValidation() {
         Exception exception = Assertions.assertThrows(IllegalArgumentException.class, 
         () -> new Game("12345", "Bob", true, 6, "Human"));
-        assertTrue(exception.getMessage().startsWith("Name can only"));
+        assertTrue(exception.getMessage().startsWith("Name can only consist"));
 
         Exception exception2 = Assertions.assertThrows(IllegalArgumentException.class, 
         () -> new Game("Alice", "12345", true, 6, "Human"));
-        assertTrue(exception2.getMessage().startsWith("Name can only"));
+        assertTrue(exception2.getMessage().startsWith("Name can only consist"));
+
+        Exception exception3 = Assertions.assertThrows(IllegalArgumentException.class, 
+        () -> new Game("Øyvind#Nål", "Åge.Æleksander", true, 6, "Human"));
+        assertTrue(exception3.getMessage().startsWith("Name can only consist"));
+
+        assertThrows(IllegalArgumentException.class,
+        () -> game.setPlayer1("1234."));
+
+        assertThrows(IllegalArgumentException.class,
+        () -> game.setPlayer2("1234#"));
     }
 
     @DisplayName ("Main method for playing a round in the game. The playRound method calls various supportmethods which will be tested on their own as well")
@@ -111,33 +121,38 @@ public class GameTest {
     @Test
     public void testValidHole() {
         //check player1
-        assertDoesNotThrow(() ->  game.isValidHole(0));
+        assertDoesNotThrow(() ->  game.playRound(0));
         assertThrows(IllegalArgumentException.class,
-        () -> game.isValidHole(7));
+        () -> game.playRound(0));
+        assertThrows(IllegalArgumentException.class,
+        () -> game.playRound(7));
 
-        //switch to player 2
+        //check player 2
+        game.getBoard().setAnotherRound(false);
         game.changePlayer();
-        assertDoesNotThrow(() -> game.isValidHole(7));
+        assertDoesNotThrow(() -> game.playRound(7));
         assertThrows(IllegalArgumentException.class,
-        () -> game.isValidHole(0));
-
+        () -> game.playRound(7));
+        assertThrows(IllegalArgumentException.class,
+        () -> game.playRound(0));
     }
 
     @Test
     public void testGameOverPlayer1() {
-        Integer[] testHoles =  {0, 0, 0, 0, 0, 0, 10, 0, 5, 0, 0, 0, 0, 10};
+        Integer[] testHoles =  {5, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 10};
         game.getBoard().setHoles(testHoles);
-        game.checkIfGameOver();
-        assertEquals(Arrays.asList(0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 10), game.getBoard().getHoles());
+        game.playRound(0);
+        assertEquals(Arrays.asList(0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 14), game.getBoard().getHoles());
         assertTrue(game.getGameOver());
     }
 
     @Test
     public void testGameOverPlayer2() {
-        Integer[] testHoles =  {0, 0, 0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, 10};
+        game.changePlayer();
+        Integer[] testHoles =  {0, 0, 0, 0, 0, 0, 10, 5, 0, 0, 0, 0, 0, 10};
         game.getBoard().setHoles(testHoles);
-        game.checkIfGameOver();
-        assertEquals(Arrays.asList(0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 15), game.getBoard().getHoles());
+        game.playRound(7);
+        assertEquals(Arrays.asList(0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 11), game.getBoard().getHoles());
         assertTrue(game.getGameOver());
     }
 

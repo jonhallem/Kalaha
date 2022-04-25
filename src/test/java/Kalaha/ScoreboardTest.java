@@ -84,13 +84,13 @@ public class ScoreboardTest {
         } catch (Exception e) {
             fail("The save does not exist");
         }
-        assertEquals(Arrays.asList(Arrays.asList(createScoreBoardContentWithoutNewLine().split(";"))).toString(), scoreboard.getScoreBoardListString().toString());
-
+        assertEquals(Arrays.asList(Arrays.asList(createScoreBoardContentWithoutNewLine().split(";"))).toString(), scoreboard.getScoreBoardListString().toString(), "The contents are not the same, double check if the file have multiple lines and delete the file if necessary to restart the test");
     }
 
 
 
 
+    //For each completed game the scoreboard appends a game with a new line to the existing scoreboard. Deletion after testing is therefore necessary. 
     @AfterAll
     public void cleanUp() {
         scoreboard.getScoreBoardPath("testScoreBoard").toFile().delete();

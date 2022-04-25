@@ -1,8 +1,6 @@
 package Kalaha;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Random;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -22,7 +20,7 @@ public class Game {
 
 
     //constructor with validation of names
-    //the number of player-decided input variables are restricted by ComboBoxes in the controller, therefore validation of parameters are kept to names (and files in saveHandler)
+    //the number of player-decided input variables are restricted by ComboBoxes in the controller, therefore validation is kept to player textinput fields (playernames and filename)
     public Game(String player1, String player2, boolean startingPlayer, int holes, String versusAI) {
         validateName(player1);
         validateName(player2);
@@ -47,15 +45,11 @@ public class Game {
         
     }
 
-    //not tested yet
     private void validateName(String player) {
         if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player)) {
             throw new IllegalArgumentException("Name can only consist of letters and spaces!");
         }
     }
-
-    //!!!!!!!!!! her har jeg samlemetoder som kaller på andre metoder (i teorien hjelpemetoder), er det da smartere å holde hjelpemetodene
-    // private i stedet for å teste de hver for seg selv i testingen? !!!!!!!!!!
 
     //main method for running a round
     public void playRound(int index) {
@@ -67,8 +61,7 @@ public class Game {
 
         changePlayer();
 
-        //!!!!!!! Ok å lage nytt objekt her? eller må jeg bruke konstruktør elns? Her lager jeg et nytt objekt (?) hver gang,
-        // er det smartere å gjøre det i konstruktøren? !!!!!!!!!
+        //checks if the player is playing versus AI, if so the AI can play a round
         if (getVersusAI() == 'E' && board.getPlayerPlaying() == false) {
             EasyAI robot = new EasyAI();
             playRound(robot.decideBestPlay(this));
@@ -80,9 +73,9 @@ public class Game {
         }
 
         checkIfGameOver();
-        }
+    }
 
-
+    //changed from private for use during testing
     public void changePlayer() {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
@@ -101,10 +94,9 @@ public class Game {
         }
     }
 
-    
     //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
     //you also can not pick an empty hole
-    public void isValidHole(int index) {
+    private void isValidHole(int index) {
 
         if (board.getPlayerPlaying() == true) {
             if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
@@ -123,7 +115,7 @@ public class Game {
 
 
 
-    public void checkIfGameOver() {
+    private void checkIfGameOver() {
         //if one side of the board is empty, start end game process
         //when one player has no stones on their side, the enemy picks up all the remaining stones on their side and puts them in their home
         if (board.getStones(0) == 0 && board.getStones(1) == 0 && board.getStones(2) == 0 && board.getStones(3) == 0 && board.getStones(4) == 0 && board.getStones(5) == 0) {
@@ -178,7 +170,17 @@ public class Game {
     public String getPlayer2() {
         return player2;
     }
+    
+    public void setPlayer1(String name) {
+        validateName(name);
+        this.player1 = name;
+    }
 
+    public void setPlayer2(String name) {
+        validateName(name);
+        this.player2 = name;
+    }
+    
     public Board getBoard() {
         return board;
     }
@@ -199,20 +201,6 @@ public class Game {
         this.gameOver = bool;
     }
 
-
-
-
-    //loading methods for updating values
-
-    public void setPlayer1(String name) {
-        validateName(name);
-        this.player1 = name;
-    }
-
-    public void setPlayer2(String name) {
-        validateName(name);
-        this.player2 = name;
-    }
 
     public static void main(String[] args) throws FileNotFoundException{
         Game game = new Game("Jon", "Hedda", false, 6, "Human");

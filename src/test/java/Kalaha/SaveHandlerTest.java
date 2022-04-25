@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -30,7 +31,7 @@ public class SaveHandlerTest {
         """;;
 
     private static final String testInvalidSaveFileContent = """
-        TestInvalid123;TestInvalidTwo;t;fle;false;H;;
+        TestInvalid;TestInvalidTwo;t;fle;false;H;;
         [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]""";;
 
 
@@ -54,37 +55,32 @@ public class SaveHandlerTest {
             "IOException should be thrown if file does not exist!");
     }
 
+    @DisplayName("Testing validateSaveFile method for corrupted files/input")
     @Test
-    public void testReadInvalidReceipt() {
+    public void testReadInvalidReceipt(){
         assertThrows(
-                Exception.class,
+                IllegalArgumentException.class,
                 () -> savehandler.readSave("testInvalidSave", game),
-                "If file is invalid, exception should be thrown");
+                "Cannot load corrupted file");
     }
 
     @Test
     public void testWriteSave() throws IOException {
-
-        // try {
-		// 	savehandler.writeSave("testSave1", game);
-		// } catch (FileNotFoundException e) {
-		// 	fail("Could not load saved file");
-		// 	return;
-		// }
-
-        // byte[] testFile = null, newFile = null;
-
-		// try {
-		// 	testFile = Files.readAllBytes(savehandler.getSavePath("testSave"));
-		// } catch (IOException e) {
-		// 	fail("Could not load test file");
-		// }
 
         savehandler.writeSave("newSave", game);
         Path expectedFile = savehandler.getSavePath("newSave");
         Path actualFile = savehandler.getSavePath("testSave");
         assertEquals(Files.mismatch(expectedFile, actualFile), -1,
                 "Contents of files are not the same");
+    }
+
+    @Test
+    public void testSaveFileNameValidation() {
+        assertThrows(IllegalArgumentException.class,
+        () -> savehandler.writeSave("Åge.txt", game));
+
+        assertThrows(IllegalArgumentException.class,
+        () -> savehandler.writeSave("Åge32#", game));
     }
 
 

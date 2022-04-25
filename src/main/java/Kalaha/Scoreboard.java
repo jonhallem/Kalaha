@@ -19,7 +19,7 @@ public class Scoreboard {
     List<List<String>> scoreBoardList;
 
     //method for saving completed games
-    //the scoreboard file is stored in the default project folder, for easier access by the examinator
+    //The scoreboard file is stored in the resources project folder, in the subfolder "Scoreboard/"
     public void scoreBoardSave(String file, Game game) throws FileNotFoundException {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(getFile(file), true))) {
@@ -32,7 +32,7 @@ public class Scoreboard {
             bw.flush();
             bw.close();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             //TODO: handle exception
         }
     }
@@ -71,8 +71,6 @@ public class Scoreboard {
         return scoreBoardString;
     }
 
-
-
     //Source: https://stackoverflow.com/questions/35761864/java-sort-list-of-lists
     public void sortScoreBoardByPlayer1() {
         Collections.sort(scoreBoardList, new SortScoreBoardByName<>());
@@ -82,13 +80,14 @@ public class Scoreboard {
         Collections.sort(scoreBoardList, new SortScoreBoardByDate<>());
     }
 
+
     private static File getFile(String filename) {
-        return new File(SaveHandler.class.getResource("Scoreboard/").getFile() + filename + ".txt");
-        }
+        return new File("src/main/resources/Kalaha/Scoreboard/" + filename + ".txt");
+    }
 
     //method for finding correct path during testing
     public Path getScoreBoardPath(String filename) {
-        return Path.of(Scoreboard.class.getResource("Scoreboard/").getFile() + filename + ".txt");
+        return Path.of("src/main/resources/Kalaha/Scoreboard/" + filename + ".txt");
     }
 
 

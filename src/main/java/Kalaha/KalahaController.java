@@ -127,6 +127,10 @@ public class KalahaController {
             feedBackLabel.setText("No such file!");
             e.printStackTrace();
             System.out.println("feil i opplastning");
+        } catch (IllegalArgumentException e) {
+            feedBackLabel.setText("Cannot load corrupted file");
+            e.printStackTrace();
+            System.out.println("feil i opplastning");
         }
     }
 
@@ -137,9 +141,9 @@ public class KalahaController {
             saveHandler.writeSave(loadInput.getText(), game);
             System.out.println("vellykket lagring");
             feedBackLabel.setText("Saved!");
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
-            feedBackLabel.setText("Error during saving");
+            feedBackLabel.setText(e.getMessage());
             e.printStackTrace();
             System.out.println("feil i lagring");
         }
