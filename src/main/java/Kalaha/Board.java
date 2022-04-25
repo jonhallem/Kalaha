@@ -33,7 +33,7 @@ public class Board {
         setStones(index, 0);
         for (int i = (index); i < endIndex;) {
             i++;
-            //restart index when iterating past index
+            //restart index when iterating past index (loop the board)
             if (i >= 14) { endIndex = endIndex-i; i = 0; }
 
 
@@ -43,8 +43,8 @@ public class Board {
                 checkIfHome(i);
             }
 
-            System.out.println("dette er index " + i + " av " + endIndex);
-            System.out.println(this.holes);
+            // System.out.println("dette er index " + i + " av " + endIndex);
+            // System.out.println(this.holes);
 
             //for each iteration update hole with 1 more stone
             //but only if it's not the enemy hole

@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class KalahaController {
 
@@ -35,6 +36,9 @@ public class KalahaController {
     @FXML
     private ListView<String> scoreBoardList;
 
+    @FXML
+    private Pane informationCover;
+
     // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
     @FXML
     private ComboBox<Integer> startingStones;
@@ -54,6 +58,9 @@ public class KalahaController {
     @FXML
     private void initialize() {
 
+        game = new Game("playerOne", "playerTwo", true, 6, "Human");
+        scoreboard = new Scoreboard();
+
         startingStones.getItems().addAll(4,5,6);
         startingStones.getSelectionModel().select(2);
 
@@ -65,7 +72,6 @@ public class KalahaController {
     private void startGame() {
         try {
             game = new Game(player1Name.getText(), player2Name.getText(), playerStarting.isSelected(), startingStones.getValue(), versusAI.getValue());
-            scoreboard = new Scoreboard();
         } catch (Exception e) {
             feedBackLabel.setText("Name can only contain letters and spaces!");
             return;
@@ -84,6 +90,7 @@ public class KalahaController {
         stoneLabel.setVisible(false);
         startingStones.setVisible(false);
         startGame.setVisible(false);
+        saveButton.setVisible(true);
     } 
 
     @FXML
@@ -102,6 +109,18 @@ public class KalahaController {
             updateScore();
             System.out.println("Riktig innlastning av view");
             feedBackLabel.setText("Loaded!");
+
+            showPlaying();
+            updateHoles();
+            player1Name.setVisible(false);
+            player2Name.setVisible(false);
+            labelAI.setVisible(false);
+            versusAI.setVisible(false);
+            playerStarting.setVisible(false);
+            stoneLabel.setVisible(false);
+            startingStones.setVisible(false);
+            startGame.setVisible(false);
+            saveButton.setVisible(true);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -138,18 +157,21 @@ public class KalahaController {
     @FXML
     private void showScoreBoard() {
         if (scoreBoardList.isVisible() == false) {
+            informationCover.setVisible(true);
             info.setVisible(false); scoreBoardList.setVisible(true); scoreBoardLabel.setVisible(true); sortLabel.setVisible(true); sortPlayer1.setVisible(true); sortTime.setVisible(true);
             hole0.setVisible(false); hole1.setVisible(false); hole2.setVisible(false); hole3.setVisible(false); hole4.setVisible(false); hole5.setVisible(false); home6.setVisible(false); 
             hole7.setVisible(false); hole8.setVisible(false); hole9.setVisible(false); hole10.setVisible(false); hole11.setVisible(false); hole12.setVisible(false); home13.setVisible(false);
             try {
-                scoreboard.scoreBoardLoad();
+                scoreboard.scoreBoardLoad("scoreboard");
                 scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
+                info.setVisible(true);
+                info.setText("Scoreboard file does not exist! Play a game first!");
                 e.printStackTrace();
             }
 
         } else {
+            informationCover.setVisible(false);
             info.setVisible(false); scoreBoardList.setVisible(false); scoreBoardLabel.setVisible(false); sortLabel.setVisible(false); sortPlayer1.setVisible(false); sortTime.setVisible(false);
             hole0.setVisible(true); hole1.setVisible(true); hole2.setVisible(true); hole3.setVisible(true); hole4.setVisible(true); hole5.setVisible(true); home6.setVisible(true); 
             hole7.setVisible(true); hole8.setVisible(true); hole9.setVisible(true); hole10.setVisible(true); hole11.setVisible(true); hole12.setVisible(true); home13.setVisible(true);
@@ -184,12 +206,12 @@ public class KalahaController {
     @FXML
     private void showPlayRules() {
         if (playRules.isVisible() == false) {
-            playRules.setVisible(true);
+            playRules.setVisible(true); informationCover.setVisible(true);
             hole0.setVisible(false); hole1.setVisible(false); hole2.setVisible(false); hole3.setVisible(false); hole4.setVisible(false); hole5.setVisible(false); home6.setVisible(false); 
             hole7.setVisible(false); hole8.setVisible(false); hole9.setVisible(false); hole10.setVisible(false); hole11.setVisible(false); hole12.setVisible(false); home13.setVisible(false);
 
         } else {
-            playRules.setVisible(false);
+            playRules.setVisible(false); informationCover.setVisible(false);
             hole0.setVisible(true); hole1.setVisible(true); hole2.setVisible(true); hole3.setVisible(true); hole4.setVisible(true); hole5.setVisible(true); home6.setVisible(true); 
             hole7.setVisible(true); hole8.setVisible(true); hole9.setVisible(true); hole10.setVisible(true); hole11.setVisible(true); hole12.setVisible(true); home13.setVisible(true);
         }
@@ -340,6 +362,7 @@ public class KalahaController {
     }
 
     private void showPlaying() {
+        info.setVisible(true);
         if (game.getBoard().getPlayerPlaying() == true) {
             info.setText("It is " + game.getPlayer1() + "'s turn!");
             info.setStyle("-fx-background-color: green;");
@@ -360,7 +383,7 @@ public class KalahaController {
             if (Integer.parseInt(game.getPlayer1Score()) > Integer.parseInt(game.getPlayer2Score())) {
                 info.setText("The game is over! " + game.getPlayer1() + " won!");
                 try {
-                    scoreboard.scoreBoardSave(game);
+                    scoreboard.scoreBoardSave("scoreboard", game);
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -368,7 +391,7 @@ public class KalahaController {
             } else if (Integer.parseInt(game.getPlayer1Score()) == Integer.parseInt(game.getPlayer2Score())) {
                 info.setText("The game is over! It is a draw!");
                 try {
-                    scoreboard.scoreBoardSave(game);
+                    scoreboard.scoreBoardSave("scoreboard", game);
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -377,7 +400,7 @@ public class KalahaController {
              else {
                 info.setText("The game is over! " + game.getPlayer2() + " won!");
                 try {
-                    scoreboard.scoreBoardSave(game);
+                    scoreboard.scoreBoardSave("scoreboard", game);
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

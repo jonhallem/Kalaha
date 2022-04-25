@@ -36,6 +36,7 @@ public class SaveHandler implements ISaveHandler {
             }
 
             game.updateScore();
+            scanner.close();
 
             System.out.println("Fullført loading");
             System.out.println(game);
@@ -52,15 +53,16 @@ public class SaveHandler implements ISaveHandler {
 
             writer.println(game.getPlayer1() +";"+ game.getPlayer2() +";"+game.getBoard().getPlayerPlaying() +";"+ Boolean.toString(game.getBoard().getAnotherRound()) +";"+ Boolean.toString(game.getGameOver()) + ";" + game.getVersusAI());
             writer.println(game.getBoard().toString());
-            
-        } catch (Exception e) {
-            //TODO: handle exception
+
+            //check if this makes a difference
+            writer.flush();
+            writer.close();
         }
         
     }
 
 
-    public static File getFile(String filename) {
+    private static File getFile(String filename) {
     return new File(SaveHandler.class.getResource("Saves/").getFile() + filename + ".txt");
     }
 
