@@ -1,6 +1,5 @@
 package Kalaha;
 
-import java.io.FileNotFoundException;
 import java.util.regex.Pattern;
 
 public class Game {
@@ -12,6 +11,8 @@ public class Game {
     private int player2Score = 0;
     private Board board;
 
+        // ------------------- TOSTRING FOR TESTING ---------------
+
     @Override
     public String toString() {
         return "Game [board=" + board + ", player1=" + player1 + ", player1Score=" + player1Score + ", player2="
@@ -19,8 +20,8 @@ public class Game {
     }
 
 
-    //constructor with validation of names
-    //the number of player-decided input variables are restricted by ComboBoxes in the controller, therefore validation is kept to player textinput fields (playernames and filename)
+    // ------------------- CONSTRUCTOR WITH VALIDATION OF NAMES ---------------
+    //the number of player-decided input variables are restricted by ComboBoxes/Checkboxes in the controller/GUI, therefore validation is kept to player textinput fields (playernames and filename)
     public Game(String player1, String player2, boolean startingPlayer, int holes, String versusAI) {
         validateName(player1);
         validateName(player2);
@@ -45,13 +46,15 @@ public class Game {
         
     }
 
+
+    // ---------------- VALIDATION OF PLAYERNAMES ---------------------
     private void validateName(String player) {
         if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player)) {
             throw new IllegalArgumentException("Name can only consist of letters and spaces!");
         }
     }
 
-    //main method for running a round
+    // ------------------ MAIN METHOD FOR RUNNING A ROUND -------------------------
     public void playRound(int index) {
 
         isValidHole(index);
@@ -75,7 +78,8 @@ public class Game {
         checkIfGameOver();
     }
 
-    //changed from private for use during testing
+    //------------------ SUPPORTING METHODS -----------------
+    //can be private, but because of testing this method is set to public 
     public void changePlayer() {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random
@@ -94,10 +98,9 @@ public class Game {
         }
     }
 
-    //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
-    //you also can not pick an empty hole
     private void isValidHole(int index) {
-
+        //double validating for checking if the player does a valid move. The double check is necessary for implementing the empty hole rule
+        //you also can not pick an empty hole
         if (board.getPlayerPlaying() == true) {
             if (index != 0 && index != 1 && index != 2 && index != 3 && index != 4 && index != 5) {
                 throw new IllegalArgumentException("You can't choose enemy holes or homes.");
@@ -112,8 +115,6 @@ public class Game {
             }
         }
     }
-
-
 
     private void checkIfGameOver() {
         //if one side of the board is empty, start end game process
@@ -149,7 +150,7 @@ public class Game {
 
 
 
-    //getters and setters
+    // ---------------- GETTERS AND SETTERS ----------------------
     public void updateScore() {
         this.player1Score = board.getStones(6);
         this.player2Score = board.getStones(13);
@@ -199,31 +200,6 @@ public class Game {
 
     public void setGameOver(boolean bool) {
         this.gameOver = bool;
-    }
-
-
-    public static void main(String[] args) throws FileNotFoundException{
-        Game game = new Game("Jon", "Hedda", false, 6, "Human");
-        Integer[] testHoles =  {1, 0, 4, 3, 1, 7, 7, 0, 7, 2, 18, 1, 9, 7};
-        game.getBoard().setHoles(testHoles);
-        System.out.println(game);
-        game.playRound(10);
-        // game.playRound(1);
-        // // game.playRound(7);
-        // game.playRound(5);
-        // // game.playRound(8);
-        // game.playRound(3);
-        // // game.playRound(9);
-        // game.playRound(1);
-        // System.out.println(game);
-        // Scoreboard scoreboard = new Scoreboard();
-        // scoreboard.scoreBoardSave(game);
-        // scoreboard.scoreBoardLoad();
-        // scoreboard.getScoreBoardListString();
-
-
-
-
     }
 
 }

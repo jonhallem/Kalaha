@@ -9,13 +9,13 @@ public class Board {
     private boolean playerPlaying;
 
 
-    //ToString
+    // ------------------------ ToString ---------------------------
     @Override
     public String toString() {
         return ""+ holes;
     }
     
-    // Constructor of a board with 4-6 stones in each hole
+    // ---------------------  BOARD CONSTRUCTOR ------------------
     public Board(int s, boolean startingPlayer) {
         //The most normal starting game options 4, 5 and 6 are restricted by the controller.
         //But in theory any number of stones can be used, which is helpful in testing
@@ -27,6 +27,8 @@ public class Board {
         //Option to change who is the starting player
         this.playerPlaying = startingPlayer;
     }
+
+ // ------------------- MAIN METHOD FOR PLACING STONES -------------------
 
     public void placeStones(int index) {
         int endIndex = (getStones(index)+index);
@@ -47,7 +49,7 @@ public class Board {
             // System.out.println(this.holes);
 
             //for each iteration update hole with 1 more stone
-            //but only if it's not the enemy hole
+            //but only if it's not the enemy home
             if (i == 6 && getPlayerPlaying() == false) {
                 endIndex++;
                 }
@@ -61,8 +63,8 @@ public class Board {
         }
     }
 
+    // ---------------- SUPPORTING METHODS ----------------
 
-    //!!!!kan være privat, men må være public for at testen skal fungere???
     private void checkIfHome(int index) {
             if (index == 6 && getPlayerPlaying() == true) {
                 // if last stone placed in player 1 home, player 1 gets another round
@@ -77,7 +79,6 @@ public class Board {
     }
     
 
-    //private
     private void checkIfEmpty(int index) {
         //the following if-check sees if the hole is empty (the latter check is only for testing purposes)
         if (getStones(index) == 0 && index != 6 && index != 13) {
@@ -108,7 +109,8 @@ public class Board {
     }
 
 
-    //settere og gettere for steiner i hull
+    // -------------------- SETTERS AND GETTERS ---------------------
+
     public void setStones(int hole, int value) {
         this.holes.set(hole, value);
     }
@@ -133,26 +135,13 @@ public class Board {
         this.playerPlaying = playerPlaying;
     }
 
-    //methods for loading
-
-    //are these in use?
-
+    //getters and setters for loading and testing
     public void setHoles(Integer[] holes) {
         this.holes = Arrays.asList(holes);
     }
-
-    //temp for scoreboardloading
 
     public List<Integer> getHoles() {
         return this.holes;
     }
 
-
-
-    public static void main(String[] args) {
-        Board board = new Board(6, true);
-        Integer[] testHoles =  {1, 0, 4, 3, 1, 7, 7, 0, 7, 2, 18, 1, 9, 7};
-        board.setHoles(testHoles);
-        board.placeStones(10);
-    }
 }

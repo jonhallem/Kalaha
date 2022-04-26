@@ -55,7 +55,7 @@ public class GameTest {
         () -> game.setPlayer2("1234#"));
     }
 
-    @DisplayName ("Main method for playing a round in the game. The playRound method calls various supportmethods which will be tested on their own as well")
+    @DisplayName ("Main method for playing a round in the game. The playRound method calls various supportmethods")
     @Test
     public void testPlayRoundHuman() {
         //play one round and check if all the values are set correctly

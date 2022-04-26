@@ -39,7 +39,7 @@ public class KalahaController {
     @FXML
     private Pane informationCover;
 
-    // Kilde: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
+    // Source: https://community.oracle.com/tech/developers/discussion/2486012/fxml-combobox-created-in-scene-builder-how-to-fetch-data-from-database
     @FXML
     private ComboBox<Integer> startingStones;
 
@@ -57,17 +57,21 @@ public class KalahaController {
 
     @FXML
     private void initialize() {
-
+        
+        // initializing game object that will be overwritten when player loads or starts game
         game = new Game("playerOne", "playerTwo", true, 6, "Human");
         scoreboard = new Scoreboard();
 
+        // initializes options for ComboBoxes
         startingStones.getItems().addAll(4,5,6);
         startingStones.getSelectionModel().select(2);
-
         versusAI.getItems().addAll("Human","Easy", "Medium");
         versusAI.getSelectionModel().select(0);
     }
 
+    // ------------------ GUI ELEMENTS -------------------
+
+    //Main method for starting a game
     @FXML
     private void startGame() {
         try {
@@ -149,15 +153,6 @@ public class KalahaController {
         }
     }
 
-//     private void showErrorMessage(String message) {
-// // er invocationTargetException
-//         Alert alert = new Alert(AlertType.ERROR);
-//         alert.setTitle("Error");
-//         alert.setHeaderText("Unvalid hole");
-//         alert.setContentText(message);
-//         alert.showAndWait();
-//     }
-
     @FXML
     private void showScoreBoard() {
         if (scoreBoardList.isVisible() == false) {
@@ -185,26 +180,16 @@ public class KalahaController {
 
     @FXML
     private void sortByPlayer1() {
-
         scoreboard.sortScoreBoardByPlayer1();
-
         scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
-
         System.out.println("sortert!");
-
-
     }
 
     @FXML
     private void sortByTime() {
-
         scoreboard.sortScoreBoardByTime();
-
         scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
-
         System.out.println("sortert!");
-
-
     }
 
     @FXML
@@ -220,7 +205,6 @@ public class KalahaController {
             hole7.setVisible(true); hole8.setVisible(true); hole9.setVisible(true); hole10.setVisible(true); hole11.setVisible(true); hole12.setVisible(true); home13.setVisible(true);
         }
     }
-
 
 
     @FXML
@@ -358,6 +342,8 @@ public class KalahaController {
 
     }
 
+    // ---------------------- SUPPORTING METHODS FOR UPDATING GUI ---------------------
+
     private void updateScore() {
         home6.setText(game.getPlayer1Score());
         home13.setText(game.getPlayer2Score());
@@ -391,6 +377,7 @@ public class KalahaController {
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
+                    feedBackLabel.setText("Error saving to scoreboard: File not found");
                 }
             } else if (Integer.parseInt(game.getPlayer1Score()) == Integer.parseInt(game.getPlayer2Score())) {
                 info.setText("The game is over! It is a draw!");
@@ -399,6 +386,7 @@ public class KalahaController {
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
+                    feedBackLabel.setText("Error saving to scoreboard: File not found");
                 }
             }
              else {
@@ -408,6 +396,7 @@ public class KalahaController {
                 } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
+                    feedBackLabel.setText("Error saving to scoreboard: File not found");
                 }
             }
         }

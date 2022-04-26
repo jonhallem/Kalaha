@@ -14,12 +14,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Scoreboard {
+    
+    // the scoreboard class could implement the SaveHandler interface, but the load and save methods need different inputs
 
-    //kan fjerne?
-    List<List<String>> scoreBoardList;
+    private List<List<String>> scoreBoardList;
+
+    //--------------------- SAVING AND LOADING -------------------------
 
     //method for saving completed games
     //The scoreboard file is stored in the resources project folder, in the subfolder "Scoreboard/"
+    // "src/main/resources/Kalaha/Saves/"
     public void scoreBoardSave(String file, Game game) throws FileNotFoundException {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(getFile(file), true))) {
@@ -46,10 +50,6 @@ public class Scoreboard {
                 String[] savedata = scanner.nextLine().split(";");
                 scoreList.add(Arrays.asList(savedata));
 
-
-                // for (int i = 0; i < 5; i++) {
-                //     savedata[i];
-                // }
                 System.out.println(scoreList);
             }
         
@@ -57,6 +57,8 @@ public class Scoreboard {
         scanner.close();
         }
     }
+
+    // -------------------------- METHODS FOR GUI LOGIC ---------------------
 
     //getter for scoreBoardList
     public List<String> getScoreBoardListString() {
@@ -72,6 +74,7 @@ public class Scoreboard {
     }
 
     //Source: https://stackoverflow.com/questions/35761864/java-sort-list-of-lists
+    //methods for sorting the list from the controller/scoreboard GUI
     public void sortScoreBoardByPlayer1() {
         Collections.sort(scoreBoardList, new SortScoreBoardByName<>());
     }
@@ -80,6 +83,7 @@ public class Scoreboard {
         Collections.sort(scoreBoardList, new SortScoreBoardByDate<>());
     }
 
+    // --------------------- SUPPORTING METHODS ---------------------------
 
     private static File getFile(String filename) {
         return new File("src/main/resources/Kalaha/Scoreboard/" + filename + ".txt");

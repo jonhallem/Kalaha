@@ -3,8 +3,10 @@ package Kalaha;
 import java.util.Random;
 
 public class EasyAI {
+
     protected int bestplay;
 
+    // ------------------- MAIN METHOD ----------------------
 
     public int decideBestPlay(Game game) {
 
@@ -16,8 +18,11 @@ public class EasyAI {
         //then checks for a better move; where a stone lands in home
         calculateHomePlay(game);
 
+        //returns a valid play
         return bestplay;
     }
+
+    // ----------------- SUPPORTING METHODS --------------------
 
     protected void calculateRandomPlay(Game game) {
         Random random = new Random();
@@ -41,7 +46,8 @@ public class EasyAI {
         
     }
 
-    //methods for testing
+    // --------------- METHODS FOR TESTING ---------------------
+
     protected int getBestPlay() {
         return bestplay;
     }

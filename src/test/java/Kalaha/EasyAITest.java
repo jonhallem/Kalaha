@@ -1,6 +1,7 @@
 package Kalaha;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,10 +39,13 @@ public class EasyAITest {
 
     }
 
-    //!!!!!!hvordan teste tilfeldige tall? !!!!!!
     @Test
     public void testRandomPlay() {
         easyAI.calculateRandomPlay(game);
+        assertTrue(easyAI.getBestPlay() > 6 || easyAI.getBestPlay() < 13);
+        assertTrue(easyAI.getBestPlay() > 6 || easyAI.getBestPlay() < 13);
+        assertTrue(easyAI.getBestPlay() > 6 || easyAI.getBestPlay() < 13);
+        assertTrue(easyAI.getBestPlay() > 6 || easyAI.getBestPlay() < 13); 
     }
 
 

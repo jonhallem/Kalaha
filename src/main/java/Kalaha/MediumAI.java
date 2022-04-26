@@ -2,6 +2,8 @@ package Kalaha;
 
 public class MediumAI extends EasyAI {
 
+    // ------------------- MAIN METHOD ----------------------
+
     @Override
     public int decideBestPlay(Game game) {
 
@@ -19,9 +21,10 @@ public class MediumAI extends EasyAI {
         return bestplay;
     }
 
+    // ----------------- SUPPORTING METHODS --------------------
 
-    //!!!!!!!! could be private but test class can't access it.
-    protected void calculateEmptyPlay(Game game) {
+    //could be private but for testing set to public
+    public void calculateEmptyPlay(Game game) {
         //checks if a hole is empty
         for (int j = 8; j < 13; j++) {
             if (game.getBoard().getStones(j) == 0) {
