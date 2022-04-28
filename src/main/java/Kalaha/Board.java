@@ -9,7 +9,7 @@ public class Board {
     private boolean playerPlaying;
 
 
-    // ------------------------ ToString ---------------------------
+    // ------------------------ TOSTRING ---------------------------
     @Override
     public String toString() {
         return ""+ holes;

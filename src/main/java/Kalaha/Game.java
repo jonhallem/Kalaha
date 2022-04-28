@@ -65,6 +65,7 @@ public class Game {
         changePlayer();
 
         //checks if the player is playing versus AI, if so the AI can play a round
+        //AI objects are created here, in case the players suddenly wants to switch who to play against
         if (getVersusAI() == 'E' && board.getPlayerPlaying() == false) {
             EasyAI robot = new EasyAI();
             playRound(robot.decideBestPlay(this));

@@ -1,6 +1,7 @@
 package Kalaha;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -374,29 +375,29 @@ public class KalahaController {
                 info.setText("The game is over! " + game.getPlayer1() + " won!");
                 try {
                     scoreboard.scoreBoardSave("scoreboard", game);
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    feedBackLabel.setText("Error saving to scoreboard: File not found");
+                    feedBackLabel.setText("Error saving to scoreboard");
                 }
             } else if (Integer.parseInt(game.getPlayer1Score()) == Integer.parseInt(game.getPlayer2Score())) {
                 info.setText("The game is over! It is a draw!");
                 try {
                     scoreboard.scoreBoardSave("scoreboard", game);
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    feedBackLabel.setText("Error saving to scoreboard: File not found");
+                    feedBackLabel.setText("Error saving to scoreboard");
                 }
             }
              else {
                 info.setText("The game is over! " + game.getPlayer2() + " won!");
                 try {
                     scoreboard.scoreBoardSave("scoreboard", game);
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    feedBackLabel.setText("Error saving to scoreboard: File not found");
+                    feedBackLabel.setText("Error saving to scoreboard");
                 }
             }
         }

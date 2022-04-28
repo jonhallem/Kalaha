@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Scoreboard {
     //method for saving completed games
     //The scoreboard file is stored in the resources project folder, in the subfolder "Scoreboard/"
     // "src/main/resources/Kalaha/Saves/"
-    public void scoreBoardSave(String file, Game game) throws FileNotFoundException {
+    public void scoreBoardSave(String file, Game game) throws IOException {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(getFile(file), true))) {
 
@@ -35,9 +36,6 @@ public class Scoreboard {
             
             bw.flush();
             bw.close();
-
-        } catch (Exception e) {
-            //TODO: handle exception
         }
     }
 
@@ -73,14 +71,13 @@ public class Scoreboard {
         return scoreBoardString;
     }
 
-    //Source: https://stackoverflow.com/questions/35761864/java-sort-list-of-lists
     //methods for sorting the list from the controller/scoreboard GUI
     public void sortScoreBoardByPlayer1() {
-        Collections.sort(scoreBoardList, new SortScoreBoardByName<>());
+        Collections.sort(scoreBoardList, new ScoreBoardByNameComparator<>());
     }
 
     public void sortScoreBoardByTime() {
-        Collections.sort(scoreBoardList, new SortScoreBoardByDate<>());
+        Collections.sort(scoreBoardList, new ScoreBoardByDateComparator<>());
     }
 
     // --------------------- SUPPORTING METHODS ---------------------------

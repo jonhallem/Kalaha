@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class EasyAI {
 
-    protected int bestplay;
+    private int bestplay;
 
     // ------------------- MAIN METHOD ----------------------
 
@@ -19,7 +19,7 @@ public class EasyAI {
         calculateHomePlay(game);
 
         //returns a valid play
-        return bestplay;
+        return getBestPlay();
     }
 
     // ----------------- SUPPORTING METHODS --------------------
@@ -31,7 +31,7 @@ public class EasyAI {
             index = random.nextInt(6)+7;
         }
         System.out.println("robot is playing random " + index);
-        this.bestplay = index;
+        setBestPlay(index);
     }
 
 
@@ -40,7 +40,7 @@ public class EasyAI {
         for (int j = 7; j < 13; j++) {
             if (game.getBoard().getStones(j)+j == (13)) {
                 System.out.println("robot is playing smart " + bestplay);
-                this.bestplay = j;
+                setBestPlay(j);;
             }
         } 
         

@@ -5,9 +5,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class SortScoreBoardByDate <T extends Comparable<T>> implements Comparator<List<String>> {
+public class ScoreBoardByDateComparator <T extends Comparable<T>> implements Comparator<List<String>> {
 
-
+    //Source: https://stackoverflow.com/questions/35761864/java-sort-list-of-lists
 
     @Override
     public int compare(List<String> l1, List<String> l2) {
