@@ -97,8 +97,7 @@ public class ScoreboardTest {
 
 
 
-
-    //For each completed game the scoreboard appends a game with a new line to the existing scoreboard. Deletion after testing is therefore necessary. 
+    // For each completed game the scoreboard appends a game with a new line to the existing scoreboard. Deletion after testing is therefore necessary. 
     @AfterAll
     public void cleanUp() {
         System.out.println("Deleting testfiles...");
