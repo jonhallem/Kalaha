@@ -28,11 +28,11 @@ public class SaveHandlerTest {
     private static final String testSaveFileContent = """
         TestOne;TestTwo;true;false;false;H
         [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]
-        """;;
+        """.replaceAll("\\R", System.getProperty("line.separator"));
 
     private static final String testInvalidSaveFileContent = """
         TestInvalid;TestInvalidTwo;t;fle;false;H;;
-        [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]""";;
+        [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]""".replaceAll("\\R", System.getProperty("line.separator"));
 
 
     @BeforeAll

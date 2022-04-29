@@ -33,7 +33,7 @@ public class ScoreboardTest {
 
         System.out.println(text + time);
         
-        return text + time + "\n";
+        return text + time + "\n".replaceAll("\\R", System.getProperty("line.separator"));
     }
 
     private String createScoreBoardContentWithoutNewLine() {
