@@ -164,7 +164,7 @@ public class KalahaController {
             try {
                 scoreboard.scoreBoardLoad("scoreboard");
                 scoreBoardList.getItems().setAll(scoreboard.getScoreBoardListString());
-            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
                 info.setVisible(true);
                 info.setText("Scoreboard file does not exist! Play a game first!");
                 e.printStackTrace();

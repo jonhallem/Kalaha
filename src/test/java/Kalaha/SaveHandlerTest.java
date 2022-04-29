@@ -41,8 +41,8 @@ public class SaveHandlerTest {
         savehandler = new SaveHandler();
         game = new Game("TestOne", "TestTwo", true, 6, "Human");
 
-        Files.write(savehandler.getSavePath("testSave"), testSaveFileContent.getBytes());
-        Files.write(savehandler.getSavePath("testInvalidSave"), testInvalidSaveFileContent.getBytes());
+        Files.write(savehandler.getFile("testSave").toPath(), testSaveFileContent.getBytes());
+        Files.write(savehandler.getFile("testInvalidSave").toPath(), testInvalidSaveFileContent.getBytes());
 
     }
 
@@ -68,8 +68,8 @@ public class SaveHandlerTest {
     public void testWriteSave() throws IOException {
 
         savehandler.writeSave("newSave", game);
-        Path expectedFile = savehandler.getSavePath("newSave");
-        Path actualFile = savehandler.getSavePath("testSave");
+        Path expectedFile = savehandler.getFile("newSave").toPath();
+        Path actualFile = savehandler.getFile("testSave").toPath();
         assertEquals(Files.mismatch(expectedFile, actualFile), -1,
                 "Contents of files are not the same");
     }
@@ -124,9 +124,10 @@ public class SaveHandlerTest {
 
     @AfterAll
     public void cleanUp() {
-        savehandler.getSavePath("newSave").toFile().delete();
-        savehandler.getSavePath("testSave").toFile().delete();
-        savehandler.getSavePath("testInvalidSave").toFile().delete();
+        System.out.println("Deleting testfiles...");
+        savehandler.getFile("newSave").delete();
+        savehandler.getFile("testSave").delete();
+        savehandler.getFile("testInvalidSave").delete();
     }
 
 }

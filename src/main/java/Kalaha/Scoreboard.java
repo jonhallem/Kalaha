@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class Scoreboard {
     // "src/main/resources/Kalaha/Saves/"
     public void scoreBoardSave(String file, Game game) throws IOException {
 
+        Files.createDirectories(getScoreBoardPath());
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(getFile(file), true))) {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -39,7 +42,7 @@ public class Scoreboard {
         }
     }
 
-    public void scoreBoardLoad(String file) throws FileNotFoundException {
+    public void scoreBoardLoad(String file) throws IOException {
         try(Scanner scanner = new Scanner(getFile(file))) {
 
             List<List<String>> scoreList = new ArrayList<>();
@@ -82,13 +85,22 @@ public class Scoreboard {
 
     // --------------------- SUPPORTING METHODS ---------------------------
 
-  private static File getFile(String filename) {
-        return new File(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
+//   private static File getFile(String filename) {
+//         return new File(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
+//     }
+
+    public File getFile(String filename) {
+        return getScoreBoardPath().resolve(filename + ".txt").toFile();
     }
 
+
     //method for finding correct path during testing
-    public Path getScoreBoardPath(String filename) {
-        return Path.of(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
+    // public Path getScoreBoardPath(String filename) {
+    //     return Path.of(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
+    // }
+
+    public static Path getScoreBoardPath() {
+        return Path.of(System.getProperty("user.home"), "tdt4100Kalaha", "scoreboard");
     }
 
 

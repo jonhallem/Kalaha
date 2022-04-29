@@ -2,7 +2,9 @@ package Kalaha;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -52,8 +54,10 @@ public class SaveHandler implements ISaveHandler {
     //Saves are stored in the resources project folder, in the subfolder "Saves/"
     // "src/main/resources/Kalaha/Saves/"
     @Override
-    public void writeSave(String filename, Game game) throws FileNotFoundException {
+    public void writeSave(String filename, Game game) throws IOException {
         
+        Files.createDirectories(getSavePath());
+
         validateSaveName(filename);
 
         try(PrintWriter writer = new PrintWriter(getFile(filename))) {
@@ -99,19 +103,26 @@ public class SaveHandler implements ISaveHandler {
     //     return new File("src/main/resources/Kalaha/Saves/" + filename + ".txt");
     // }
 
-    private static File getFile(String filename) {
-        return new File(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
+    // private static File getFile(String filename) {
+    //     return new File(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
+    // }
+
+    public File getFile(String filename) {
+        return getSavePath().resolve(filename + ".txt").toFile();
     }
 
 
     //method for finding correct path during testing
-    public Path getSavePath(String filename) {
-        return Path.of(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
-    }
-
     // public Path getSavePath(String filename) {
     //     return Path.of("src/main/resources/Kalaha/Saves/" + filename + ".txt");
     // }
 
+    // public Path getSavePath(String filename) {
+    //     return Path.of(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
+    // }
+
+    public static Path getSavePath() {
+        return Path.of(System.getProperty("user.home"), "tdt4100Kalaha", "saves");
+    }
 
 }

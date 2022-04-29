@@ -55,7 +55,7 @@ public class ScoreboardTest {
         scoreboard = new Scoreboard();
         game = new Game("TestOne", "TestTwo", true, 0, "Human");
 
-        Files.write(scoreboard.getScoreBoardPath("testScoreBoard"), createScoreBoardContent().getBytes());
+        Files.write(scoreboard.getFile("testScoreBoard").toPath(), createScoreBoardContent().getBytes());
     }
 
     @Test
@@ -71,8 +71,8 @@ public class ScoreboardTest {
     public void testWriteScoreBoard() throws IOException {
 
         scoreboard.scoreBoardSave("newScoreBoard", game);
-        Path expectedFile = scoreboard.getScoreBoardPath("newScoreBoard");
-        Path actualFile = scoreboard.getScoreBoardPath("testScoreBoard");
+        Path expectedFile = scoreboard.getFile("newScoreBoard").toPath();
+        Path actualFile = scoreboard.getFile("testScoreBoard").toPath();
         assertEquals(Files.mismatch(expectedFile, actualFile), -1,
                 "Contents of files are not the same");
     }
@@ -93,8 +93,9 @@ public class ScoreboardTest {
     //For each completed game the scoreboard appends a game with a new line to the existing scoreboard. Deletion after testing is therefore necessary. 
     @AfterAll
     public void cleanUp() {
-        scoreboard.getScoreBoardPath("testScoreBoard").toFile().delete();
-        scoreboard.getScoreBoardPath("newScoreBoard").toFile().delete();
+        System.out.println("Deleting testfiles...");
+        scoreboard.getFile("testScoreBoard").delete();
+        scoreboard.getFile("newScoreBoard").delete();
     }
     
 }

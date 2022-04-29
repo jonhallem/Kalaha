@@ -8,6 +8,6 @@ public interface ISaveHandler{
     void readSave(String filename, Game game) throws IOException;
 
 
-    void writeSave(String filename, Game game) throws FileNotFoundException;
+    void writeSave(String filename, Game game) throws IOException;
     
 }
