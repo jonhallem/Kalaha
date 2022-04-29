@@ -25,8 +25,8 @@ public class ScoreBoardByDateComparator <T extends Comparable<T>> implements Com
             System.out.println("Error in date translation " + e);
             return 0;
             //TODO: handle exception
-}
+        }
 
-    }
+    }  
     
 }

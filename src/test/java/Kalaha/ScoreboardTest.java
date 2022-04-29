@@ -9,7 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -95,6 +97,29 @@ public class ScoreboardTest {
         assertEquals(Arrays.asList(Arrays.asList(createScoreBoardContentWithoutNewLine().split(";"))).toString(), scoreboard.getScoreBoardListString().toString(), "The contents are not the same, double check if the file have multiple lines and delete the file if necessary to restart the test");
     }
 
+    @DisplayName("Method to make sure sorting works alphabetically")
+    @Test
+    public void testSortingByAlphabet() {
+        List<String> b = Arrays.asList("Bbb");
+        List<String> a =Arrays.asList("Aaa");
+        List<String> c =Arrays.asList("Ccc");
+        List<List<String>> list = Arrays.asList(c, b, a);
+        assertEquals("[[Ccc], [Bbb], [Aaa]]", list.toString());
+        Collections.sort(list, new ScoreBoardByNameComparator<>());
+        assertEquals("[[Aaa], [Bbb], [Ccc]]", list.toString());
+    }
+
+    @DisplayName("Method to make sure sorting works by date")
+    @Test
+    public void testSortingByDate() {
+        List<String> a = Arrays.asList("A", "0", "B" , "0", "29/04/2022 18:09");
+        List<String> b =Arrays.asList("A", "0", "B" , "0", "29/04/1994 15:09");
+        List<String> c =Arrays.asList("A", "0", "B" , "0", "29/04/2021 00:00");
+        List<List<String>> list = Arrays.asList(a, b, c);
+        assertEquals("[[A, 0, B, 0, 29/04/2022 18:09], [A, 0, B, 0, 29/04/1994 15:09], [A, 0, B, 0, 29/04/2021 00:00]]", list.toString());
+        Collections.sort(list, new ScoreBoardByDateComparator<>());
+        assertEquals("[[A, 0, B, 0, 29/04/2022 18:09], [A, 0, B, 0, 29/04/2021 00:00], [A, 0, B, 0, 29/04/1994 15:09]]", list.toString());
+    }
 
 
     // For each completed game the scoreboard appends a game with a new line to the existing scoreboard. Deletion after testing is therefore necessary. 
