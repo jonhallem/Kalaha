@@ -55,6 +55,11 @@ public class GameTest {
         () -> game.setPlayer2("1234#"));
     }
 
+    @Test
+    public void testToString() {
+        assertEquals("Game [board=[6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0], player1=Alice, player1Score=0, player2=Bob, player2Score=0, gameover=false]", game.toString());
+    }
+
     @DisplayName ("Main method for playing a round in the game. The playRound method calls various supportmethods")
     @Test
     public void testPlayRoundHuman() {
@@ -88,6 +93,78 @@ public class GameTest {
         game.getBoard().setHoles(testHoles);
         game.playRound(0);
         assertTrue(game.getGameOver());
+    }
+
+    @DisplayName ("Double check method for playing a round in the game. The playRound method calls various supportmethods and needs to be correct for many values")
+    @Test
+    public void testPlayRound() {
+        //plays multiple rounds and check if all the values are set correctly
+        game.playRound(5);
+        assertEquals(Arrays.asList(6, 6, 6, 6, 6, 0, 1, 7, 7, 7, 7, 7, 6, 0), game.getBoard().getHoles());
+        assertFalse(game.getBoard().getPlayerPlaying());
+        assertEquals("1", game.getPlayer1Score());
+        assertEquals("0", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(7);
+        assertEquals(Arrays.asList(7, 6, 6, 6, 6, 0, 1, 0, 8, 8, 8, 8, 7, 1), game.getBoard().getHoles());
+        assertTrue(game.getBoard().getPlayerPlaying());
+        assertEquals("1", game.getPlayer1Score());
+        assertEquals("1", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(4);
+        assertEquals(Arrays.asList(7, 6, 6, 6, 0, 1, 2, 1, 9, 9, 9, 8, 7, 1), game.getBoard().getHoles());
+        assertFalse(game.getBoard().getPlayerPlaying());
+        assertEquals("2", game.getPlayer1Score());
+        assertEquals("1", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(12);
+        assertEquals(Arrays.asList(8, 7, 7, 7, 1, 2, 2, 1, 9, 9, 9, 8, 0, 2), game.getBoard().getHoles());
+        assertTrue(game.getBoard().getPlayerPlaying());
+        assertEquals("2", game.getPlayer1Score());
+        assertEquals("2", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(5);
+        assertEquals(Arrays.asList(8, 7, 7, 7, 1, 0, 3, 2, 9, 9, 9, 8, 0, 2), game.getBoard().getHoles());
+        assertFalse(game.getBoard().getPlayerPlaying());
+        assertEquals("3", game.getPlayer1Score());
+        assertEquals("2", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(11);
+        assertEquals(Arrays.asList(9, 8, 8, 8, 2, 1, 3, 2, 9, 9, 9, 0, 1, 3), game.getBoard().getHoles());
+        assertTrue(game.getBoard().getPlayerPlaying());
+        assertEquals("3", game.getPlayer1Score());
+        assertEquals("3", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        //AnotherRound should keep player1 playing each time he gets last stone in home
+        game.playRound(5);
+        assertTrue(game.getBoard().getAnotherRound());
+        assertEquals(Arrays.asList(9, 8, 8, 8, 2, 0, 4, 2, 9, 9, 9, 0, 1, 3), game.getBoard().getHoles());
+        assertTrue(game.getBoard().getPlayerPlaying());
+        assertEquals("4", game.getPlayer1Score());
+        assertEquals("3", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(4);
+        assertTrue(game.getBoard().getAnotherRound());
+        assertEquals(Arrays.asList(9, 8, 8, 8, 0, 1, 5, 2, 9, 9, 9, 0, 1, 3), game.getBoard().getHoles());
+        assertTrue(game.getBoard().getPlayerPlaying());
+        assertEquals("5", game.getPlayer1Score());
+        assertEquals("3", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
+
+        game.playRound(0);
+        assertFalse(game.getBoard().getAnotherRound());
+        assertEquals(Arrays.asList(0, 9, 9, 9, 1, 2, 6, 3, 10, 10, 9, 0, 1, 3), game.getBoard().getHoles());
+        assertFalse(game.getBoard().getPlayerPlaying());
+        assertEquals("6", game.getPlayer1Score());
+        assertEquals("3", game.getPlayer2Score());
+        assertFalse(game.getGameOver());
     }
 
 

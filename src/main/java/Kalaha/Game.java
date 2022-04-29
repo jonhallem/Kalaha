@@ -80,7 +80,7 @@ public class Game {
     }
 
     //------------------ SUPPORTING METHODS -----------------
-    //can be private, but because of testing this method is set to public 
+    //can be private, but because of use during testing this method is set to public 
     public void changePlayer() {
         // if (this.whoIsPlaying.equals(null)) {
         //     //random

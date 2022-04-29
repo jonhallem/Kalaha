@@ -144,4 +144,9 @@ public class Board {
         return this.holes;
     }
 
+
+    public static void main(String[] args) {
+        Board board = new Board(6, true);
+        board.setStones(0, "ll");
+    }
 }

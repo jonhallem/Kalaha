@@ -94,15 +94,24 @@ public class SaveHandler implements ISaveHandler {
 
     // --------------- SUPPORTING METHODS ----------------
 
+    // old?????
+    // private static File getFile(String filename) {
+    //     return new File("src/main/resources/Kalaha/Saves/" + filename + ".txt");
+    // }
+
     private static File getFile(String filename) {
-        return new File("src/main/resources/Kalaha/Saves/" + filename + ".txt");
+        return new File(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
     }
 
 
     //method for finding correct path during testing
     public Path getSavePath(String filename) {
-        return Path.of("src/main/resources/Kalaha/Saves/" + filename + ".txt");
+        return Path.of(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
     }
+
+    // public Path getSavePath(String filename) {
+    //     return Path.of("src/main/resources/Kalaha/Saves/" + filename + ".txt");
+    // }
 
 
 }

@@ -28,13 +28,10 @@ public class BoardTest {
         assertFalse(board.getAnotherRound());
      }
 
-
-    // @BeforeEach
-    // public void testConstructor() throws Exception {
-    //     assertThrows(
-    //         IllegalArgumentException.class,
-    //         new Board(2, false));
-    // }
+     @Test
+     public void testToString() {
+         assertEquals("[6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]", board.toString());
+     }
 
     @DisplayName("Tests main method of boardclass, which also tests the supportingmethod checkIfHome")
     @Test

@@ -82,13 +82,13 @@ public class Scoreboard {
 
     // --------------------- SUPPORTING METHODS ---------------------------
 
-    private static File getFile(String filename) {
-        return new File("src/main/resources/Kalaha/Scoreboard/" + filename + ".txt");
+  private static File getFile(String filename) {
+        return new File(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
     }
 
     //method for finding correct path during testing
     public Path getScoreBoardPath(String filename) {
-        return Path.of("src/main/resources/Kalaha/Scoreboard/" + filename + ".txt");
+        return Path.of(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
     }
 
 
