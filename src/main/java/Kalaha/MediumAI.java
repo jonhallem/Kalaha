@@ -23,7 +23,7 @@ public class MediumAI extends EasyAI {
 
     // ----------------- SUPPORTING METHODS --------------------
 
-    //could be private but for testing set to public
+    //for testing set to public
     public void calculateEmptyPlay(Game game) {
         //checks if a hole is empty
         for (int j = 8; j < 13; j++) {

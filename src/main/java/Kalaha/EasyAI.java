@@ -46,7 +46,7 @@ public class EasyAI {
         
     }
 
-    // --------------- METHODS FOR TESTING ---------------------
+    // --------------- GETTERS AND SETTERS - ALSO USED FOR TESTING ---------------------
 
     protected int getBestPlay() {
         return bestplay;

@@ -65,13 +65,27 @@ public class Game {
         changePlayer();
 
         //checks if the player is playing versus AI, if so the AI can play a round
-        //AI objects are created here, in case the players suddenly wants to switch who to play against
+        //AI objects are created here, in case the players suddenly wants to switch who to play against (testing)
         if (getVersusAI() == 'E' && board.getPlayerPlaying() == false) {
+
+                // try {
+                //     Thread.sleep(300);
+                // } catch (Exception e) {
+                //     e.printStackTrace();
+                // }
+
             EasyAI robot = new EasyAI();
             playRound(robot.decideBestPlay(this));
         }
 
         if (getVersusAI() == 'M' && board.getPlayerPlaying() == false) {
+
+                // try {
+                //     Thread.sleep(300);
+                // } catch (Exception e) {
+                //     e.printStackTrace();
+                // }
+
             MediumAI robot = new MediumAI();
             playRound(robot.decideBestPlay(this));
         }
@@ -82,9 +96,6 @@ public class Game {
     //------------------ SUPPORTING METHODS -----------------
     //can be private, but because of use during testing this method is set to public 
     public void changePlayer() {
-        // if (this.whoIsPlaying.equals(null)) {
-        //     //random
-        // }
         
         if (board.getAnotherRound() == true) {
             //If anotherRound is set to true, do not change player

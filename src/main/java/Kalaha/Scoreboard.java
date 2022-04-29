@@ -24,8 +24,7 @@ public class Scoreboard {
     //--------------------- SAVING AND LOADING -------------------------
 
     //method for saving completed games
-    //The scoreboard file is stored in the resources project folder, in the subfolder "Scoreboard/"
-    // "src/main/resources/Kalaha/Saves/"
+    //The scoreboard file is stored in the users homefolder, in the subfolder "tdt4100Kalaha/scoreboard/"
     public void scoreBoardSave(String file, Game game) throws IOException {
 
         Files.createDirectories(getScoreBoardPath());
@@ -85,23 +84,14 @@ public class Scoreboard {
 
     // --------------------- SUPPORTING METHODS ---------------------------
 
-//   private static File getFile(String filename) {
-//         return new File(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
-//     }
-
+    //set to public for testing
     public File getFile(String filename) {
         return getScoreBoardPath().resolve(filename + ".txt").toFile();
     }
 
-
-    //method for finding correct path during testing
-    // public Path getScoreBoardPath(String filename) {
-    //     return Path.of(SaveHandler.class.getResource("scoreboard/").getFile() + filename + ".txt");
-    // }
-
-    public static Path getScoreBoardPath() {
+    //scoreboard is set to home folder/tdt4100Kalaha/scoreboard
+    private static Path getScoreBoardPath() {
         return Path.of(System.getProperty("user.home"), "tdt4100Kalaha", "scoreboard");
     }
-
 
 }

@@ -207,6 +207,8 @@ public class KalahaController {
         }
     }
 
+    // ------------------ HOLES -------------------
+
 
     @FXML
     private void hole0() {
@@ -403,14 +405,6 @@ public class KalahaController {
         }
         
     }
-
-    // private void sleep() {
-    //     try {
-    //         Thread.sleep(1000);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    // }
 
     private void updateHoles() {
         feedBackLabel.setText("");

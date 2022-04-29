@@ -51,8 +51,7 @@ public class SaveHandler implements ISaveHandler {
         }
     }
 
-    //Saves are stored in the resources project folder, in the subfolder "Saves/"
-    // "src/main/resources/Kalaha/Saves/"
+    //Saves are stored in the users homefolder, in the subfolder "tdt4100Kalaha/saves/"
     @Override
     public void writeSave(String filename, Game game) throws IOException {
         
@@ -98,30 +97,13 @@ public class SaveHandler implements ISaveHandler {
 
     // --------------- SUPPORTING METHODS ----------------
 
-    // old?????
-    // private static File getFile(String filename) {
-    //     return new File("src/main/resources/Kalaha/Saves/" + filename + ".txt");
-    // }
-
-    // private static File getFile(String filename) {
-    //     return new File(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
-    // }
-
+    //set to public for testing
     public File getFile(String filename) {
         return getSavePath().resolve(filename + ".txt").toFile();
     }
 
-
-    //method for finding correct path during testing
-    // public Path getSavePath(String filename) {
-    //     return Path.of("src/main/resources/Kalaha/Saves/" + filename + ".txt");
-    // }
-
-    // public Path getSavePath(String filename) {
-    //     return Path.of(SaveHandler.class.getResource("saves/").getFile() + filename + ".txt");
-    // }
-
-    public static Path getSavePath() {
+    //saves are set to home folder/tdt4100Kalaha/saves
+    private static Path getSavePath() {
         return Path.of(System.getProperty("user.home"), "tdt4100Kalaha", "saves");
     }
 

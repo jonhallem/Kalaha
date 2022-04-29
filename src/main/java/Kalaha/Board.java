@@ -1,5 +1,6 @@
 package Kalaha;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -141,7 +142,7 @@ public class Board {
     }
 
     public List<Integer> getHoles() {
-        return this.holes;
+        return new ArrayList<>(this.holes);
     }
 
 }
