@@ -18,13 +18,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+// Be sure to finish a save a game first for the savehandler class to create the correct directory in user.home folder
+// If the test fails at first, be sure to run it a few times to delete excess files.
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SaveHandlerTest {
     
     private SaveHandler savehandler;
     private Game game;
 
-
+    // this project is made on MAC, the \\R replacement is an attempt to make it work on on Windows
     private static final String testSaveFileContent = """
         TestOne;TestTwo;true;false;false;H
         [6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0]
@@ -40,6 +43,9 @@ public class SaveHandlerTest {
         System.out.println("Initialiserer...");
         savehandler = new SaveHandler();
         game = new Game("TestOne", "TestTwo", true, 6, "Human");
+
+        // In case the examinator does not run the app first, this code makes sure the correct directory is made in the user.home folder
+        Files.createDirectories(Path.of(System.getProperty("user.home"), "tdt4100Kalaha", "saves"));
 
         Files.write(savehandler.getFile("testSave").toPath(), testSaveFileContent.getBytes());
         Files.write(savehandler.getFile("testInvalidSave").toPath(), testInvalidSaveFileContent.getBytes());

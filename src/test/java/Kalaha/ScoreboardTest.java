@@ -17,23 +17,27 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+// Be sure to finish a game first for the scoreboard class to create the correct directory in user.home folder
+// If the test fails at first, be sure to run it a few times to delete excess files.
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ScoreboardTest {
 
     private Scoreboard scoreboard;
     private Game game;
 
+    // this project is made on MAC, the \\R replacement is an attempt to make it work on on Windows
     private String createScoreBoardContent() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date date = new Date();
         String time = dateFormat.format(date);
 
         String text = """
-            TestOne;0;TestTwo;0;""";
+            TestOne;0;TestTwo;0;""".replaceAll("\\R", System.getProperty("line.separator"));
 
         System.out.println(text + time);
         
-        return text + time + "\n".replaceAll("\\R", System.getProperty("line.separator"));
+        return text + time + "\n";
     }
 
     private String createScoreBoardContentWithoutNewLine() {
@@ -42,7 +46,7 @@ public class ScoreboardTest {
         String time = dateFormat.format(date);
 
         String text = """
-            TestOne;0;TestTwo;0;""";
+            TestOne;0;TestTwo;0;""".replaceAll("\\R", System.getProperty("line.separator"));
 
         System.out.println(text + time);
         
@@ -54,6 +58,10 @@ public class ScoreboardTest {
         System.out.println("Initialiserer...");
         scoreboard = new Scoreboard();
         game = new Game("TestOne", "TestTwo", true, 0, "Human");
+
+        // In case the examinator does not run the app first, this code makes sure the correct directory is made in the user.home folder
+        Files.createDirectories(Path.of(System.getProperty("user.home"), "tdt4100Kalaha", "scoreboard"));
+
 
         Files.write(scoreboard.getFile("testScoreBoard").toPath(), createScoreBoardContent().getBytes());
     }
