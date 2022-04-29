@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// This class stands for all of the calculations and logic connected to the board of the game
+
 public class Board {
     private List<Integer> holes;
     private boolean anotherRound;

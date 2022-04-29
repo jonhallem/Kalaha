@@ -2,6 +2,8 @@ package Kalaha;
 
 import java.util.regex.Pattern;
 
+// this class stands for all the logic connected to the "game" side of the boardgame
+
 public class Game {
     private boolean gameOver;
     private String player1;
@@ -49,7 +51,7 @@ public class Game {
 
     // ---------------- VALIDATION OF PLAYERNAMES ---------------------
     private void validateName(String player) {
-        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player)) {
+        if (!Pattern.matches("[A-ZÆØÅa-zæøå ]*", player)) { //keep in mind the name can be empty
             throw new IllegalArgumentException("Name can only consist of letters and spaces!");
         }
     }
